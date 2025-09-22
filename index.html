@@ -2,52 +2,55 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Slope</title>
+  <title>Slope - Line Art Style</title>
   <style>
     body { 
       font-family: "Segoe UI", "Helvetica Neue", sans-serif;
       text-align: center; 
       margin: 0;
-      background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
-      color: #333;
+      background: #f9f9f9;
+      color: #222;
     }
 
     h1 {
       font-size: 3vw;
       margin: 2vh 0;
       font-weight: 700;
-      color: #222;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+      color: #111;
+      border-bottom: 2px solid #222;
+      display: inline-block;
+      padding-bottom: 0.5vh;
     }
 
     h2, h3 {
-      color: #444;
+      color: #333;
       margin-bottom: 2vh;
+      font-weight: 500;
     }
 
     .slope-list, .slope-image { 
       margin-top: 3vh; 
     }
 
+    /* カード風デザインを線画風に */
     .slope-list div {
       display: inline-block;
       margin: 2vw;
       text-align: center;
       background: #fff;
+      border: 2px solid #444; /* シャドウを削除し線画に */
       border-radius: 1vw;
       padding: 1.5vw;
-      box-shadow: 0 0.6vw 1.2vw rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 20vw; /* カード幅は画面幅に合わせて相対指定 */
-      max-width: 300px; /* 大きすぎないよう制限 */
+      width: 20vw;
+      max-width: 300px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
     .slope-list div:hover {
-      transform: translateY(-0.5vw);
-      box-shadow: 0 1vw 2vw rgba(0,0,0,0.25);
+      transform: translateY(-0.3vw);
+      border-color: #1e88e5;
     }
 
-    /* 画像サイズを画面幅に合わせる */
     .slope-list div img,
     .slope-image img {
       width: 100%;
@@ -55,7 +58,8 @@
       border-radius: 0.8vw;
       display: block;
       margin: 0 auto 1vh;
-      max-width: 90vw; /* PCでもスマホでも画面幅に収まる */
+      border: 1px solid #333; /* 画像も線画風に */
+      background: #fff;
     }
 
     button { 
@@ -64,59 +68,48 @@
       font-size: 1.2vw;
       border-radius: 0.8vw;
       cursor: pointer;
-      border: none;
-      background: linear-gradient(135deg, #42a5f5, #1e88e5);
-      color: #fff;
+      border: 2px solid #1e88e5;
+      background: none; /* 線画風は背景なし */
+      color: #1e88e5;
       font-weight: 600;
       transition: all 0.3s ease;
-      box-shadow: 0 0.4vw 0.8vw rgba(0,0,0,0.2);
     }
 
     button:hover {
-      background: linear-gradient(135deg, #64b5f6, #2196f3);
+      background: #e3f2fd;
       transform: scale(1.05);
     }
 
     /* 選択中の高さボタン */
     .active {
-      background: linear-gradient(135deg, #43a047, #2e7d32) !important;
-      box-shadow: 0 0.6vw 1.2vw rgba(0,0,0,0.3);
+      background: #bbdefb;
+      border-color: #1565c0;
+      color: #1565c0;
     }
 
     /* 現在の高さ表示 */ 
     #currentHeight {
-      margin-top: 0.5vh; /* 少しだけ隙間を追加 */
+      margin-top: 0.5vh;
       font-size: 1.8vw;
       font-weight: bold;
-      color: #43a047;
+      color: #1565c0;
     }
 
-    /* ===== スマホ向け調整 ===== */
+    /* スマホ向け調整 */
     @media (max-width: 600px) {
-      body {
-        font-size: 4vw;
-      }
-
-      h1 {
-        font-size: 7vw;
-      }
-
-      h2 {
-        font-size: 5vw;
-      }
-
+      body { font-size: 4vw; }
+      h1 { font-size: 7vw; }
+      h2 { font-size: 5vw; }
       .slope-list div {
         width: 85vw;
         margin: 4vw auto;
         border-radius: 3vw;
         padding: 4vw;
       }
-
       img {
         width: 100%;
         border-radius: 2vw;
       }
-
       button {
         width: 80vw;
         margin: 3vw auto;
@@ -124,9 +117,8 @@
         font-size: 4vw;
         border-radius: 2vw;
       }
-
       #currentHeight {
-        margin-top: 1vw; /* スマホでは少し広めに */
+        margin-top: 1vw;
         font-size: 5vw;
       }
     }
@@ -189,7 +181,6 @@
       const heightLabel = document.getElementById("currentHeight");
       const buttons = document.querySelectorAll("#heightMenu button");
 
-      // 選択中ボタンを強調
       buttons.forEach(btn => {
         btn.classList.remove("active");
         if (btn.textContent == height) {
@@ -197,7 +188,6 @@
         }
       });
 
-      // 選択中の高さを表示
       heightLabel.textContent = `現在の高さ: ${height} mm`;
 
       slopeList.innerHTML = "";
