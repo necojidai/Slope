@@ -5,95 +5,115 @@
   <title>Slope</title>
   <style>
     body { 
-      font-family: sans-serif; 
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
       text-align: center; 
-      font-size: 1.2vw;
+      margin: 0;
+      background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
+      color: #333;
+    }
+
+    h1 {
+      font-size: 3vw;
+      margin: 2vh 0;
+      font-weight: 700;
+      color: #222;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    }
+
+    h2, h3 {
+      color: #444;
+      margin-bottom: 2vh;
     }
 
     .slope-list, .slope-image { 
-      margin-top: 2vh; 
+      margin-top: 3vh; 
     }
 
     .slope-list div {
       display: inline-block;
       margin: 2vw;
       text-align: center;
+      background: #fff;
+      border-radius: 1vw;
+      padding: 1.5vw;
+      box-shadow: 0 0.6vw 1.2vw rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .slope-list div:hover {
+      transform: translateY(-0.5vw);
+      box-shadow: 0 1vw 2vw rgba(0,0,0,0.25);
     }
 
     img {
       width: 20vw;
-      max-width: 200px;
+      max-width: 220px;
       height: auto;
-      border-radius: 1vw;
+      border-radius: 0.8vw;
       display: block;
       margin: 0 auto 1vh;
-      box-shadow: 0 0.3vw 0.8vw rgba(0,0,0,0.2);
     }
 
     button { 
       margin: 1vw; 
-      padding: 1.2vw 2.5vw;
-      font-size: 1.6vw;
+      padding: 1vw 2vw;
+      font-size: 1.2vw;
       border-radius: 0.8vw;
       cursor: pointer;
-      border: 0.15vw solid #666;
-      background: #f0f0f0;
+      border: none;
+      background: linear-gradient(135deg, #42a5f5, #1e88e5);
+      color: #fff;
+      font-weight: 600;
       transition: all 0.3s ease;
+      box-shadow: 0 0.4vw 0.8vw rgba(0,0,0,0.2);
     }
 
     button:hover {
-      background: #e0e0e0;
+      background: linear-gradient(135deg, #64b5f6, #2196f3);
+      transform: scale(1.05);
     }
 
     /* 選択中の高さボタン */
     .active {
-      background: #4caf50;
-      color: white;
-      font-weight: bold;
-      border-color: #388e3c;
+      background: linear-gradient(135deg, #43a047, #2e7d32) !important;
+      box-shadow: 0 0.6vw 1.2vw rgba(0,0,0,0.3);
     }
 
     /* 現在の高さ表示 */
     #currentHeight {
-      margin-top: 2vh;
-      font-size: 2vw;
+      margin-top: 3vh;
+      font-size: 1.8vw;
       font-weight: bold;
-      color: #333;
-    }
-
-    /* スロープ選択のタイトルを大きく */
-    .slope-list h3 {
-      font-size: 2vw;
-      margin-bottom: 2vh;
-      color: #444;
+      color: #1e88e5;
     }
 
     /* ===== スマホ向け調整 ===== */
     @media (max-width: 600px) {
       body {
-        font-size: 3.5vw;
-      }
-
-      h1 {
-        font-size: 6vw;
-      }
-
-      h2 {
-        font-size: 4.5vw;
-      }
-
-      .slope-list h3 {
         font-size: 4vw;
       }
 
-      img {
-        width: 80vw;
-        max-width: none;
+      h1 {
+        font-size: 7vw;
+      }
+
+      h2 {
+        font-size: 5vw;
+      }
+
+      .slope-list div {
+        width: 85vw;
+        margin: 4vw auto;
         border-radius: 3vw;
+        padding: 4vw;
+      }
+
+      img {
+        width: 75vw;
+        border-radius: 2vw;
       }
 
       button {
-        display: block;
         width: 80vw;
         margin: 3vw auto;
         padding: 4vw 0;
@@ -102,7 +122,7 @@
       }
 
       #currentHeight {
-        font-size: 4.5vw;
+        font-size: 5vw;
       }
     }
   </style>
@@ -112,7 +132,7 @@
 
   <!-- 段差の高さ選択 -->
   <div id="heightMenu">
-    <h2>段差の高さを選んでください</h2>
+    <h2>段差の高さ（mm）を選んでください</h2>
     <button onclick="showslope(100)">100</button>
     <button onclick="showslope(200)">200</button>
     <button onclick="showslope(300)">300</button>  
