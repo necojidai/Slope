@@ -1,1 +1,106 @@
 # Slope
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Slope</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; }
+    .fruit-list, .cut-image { margin-top: 20px; }
+    .fruit-list div {
+      display: inline-block;
+      margin: 10px;
+    }
+    img {
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    button { margin: 5px; padding: 10px 20px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Slope</h1>
+
+  <!-- 段差の高さ選択 -->
+  <div id="heightrMenu">
+    <h2>段差の高さを選んでください</h2>
+    <button onclick="showvehicle(100)">赤</button>
+    <button onclick="showvehicle(200)">黄</button>
+    <button onclick="showvehicle(300)">オレンジ</button>
+    <button onclick="showvehicle(650)">緑</button>
+  </div>
+
+  <!-- 高所作業車候補 -->
+  <div class="aerial work vehicle-list" id="vehicleList"></div>
+
+  <!-- スロープ図 -->
+  <div class="slope-image" id="slopeImage"></div>
+
+  <script>
+    // 段差の高さごとの高所作業車候補データ
+    const vehicleData = {
+      100: [
+        { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" } ,        
+        { name: "かるスロ", img: "images/kalusulo.jpg", cut: "images/kalusulo_slope.jpg" },  
+        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", cut: "images/sgdragon_slope.jpg" }
+      ],
+
+      200: [
+        { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" } ,  
+        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", cut: "images/sgdragon_slope.jpg" }
+      ],
+      300: [
+        { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" }  
+      ],
+      450: [
+        { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" }  
+      ]     
+      650: [
+        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", cut: "images/sgdragon_slope.jpg" }
+      ]
+    };
+
+    // 色を選んだときの処理
+    function showvehicle(100) {
+      const vehicleList = document.getElementById("vehicleList");
+      const slopeImage = document.getElementById("slopeImage");
+      vehicleList.innerHTML = "";
+      slopeImage.innerHTML = "";
+
+      vehicleData[color].forEach(vehicle => {
+        const div = document.createElement("div");
+        const img = document.createElement("img");
+        const btn = document.createElement("button");
+
+        img.src = vehicle.img;
+        img.alt = vehicle.name;
+
+        btn.textContent = vehicle.name;
+        btn.onclick = () => {
+          slopeImage.innerHTML = `<h2>${vehicle.name}のスロープ図</h2>
+                                <img src="${vehicle.slope}" alt="${vehicle.name}スロープ">
+                                <br><button onclick="reset()">戻る</button>`;
+        };
+
+        div.appendChild(img);
+        div.appendChild(btn);
+        vehicleList.appendChild(div);
+      });
+    }
+
+    // 戻るボタンでリセット
+    function reset() {
+      document.getElementById("vehicleList").innerHTML = "";
+      document.getElementById("slopeImage").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
