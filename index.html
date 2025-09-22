@@ -38,6 +38,7 @@
       padding: 1.5vw;
       box-shadow: 0 0.6vw 1.2vw rgba(0,0,0,0.15);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 20vw; /* カード幅は親要素で調整 */
     }
 
     .slope-list div:hover {
@@ -45,9 +46,10 @@
       box-shadow: 0 1vw 2vw rgba(0,0,0,0.25);
     }
 
-    img {
-      width: 20vw;
-      max-width: 220px;
+    /* 画像サイズを画面幅に合わせる */
+    .slope-list div img,
+    .slope-image img {
+      width: 100%;
       height: auto;
       border-radius: 0.8vw;
       display: block;
@@ -109,7 +111,7 @@
       }
 
       img {
-        width: 75vw;
+        width: 100%; /* スマホでも幅いっぱい */
         border-radius: 2vw;
       }
 
