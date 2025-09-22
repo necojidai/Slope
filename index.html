@@ -4,21 +4,39 @@
   <meta charset="UTF-8">
   <title>Slope</title>
   <style>
-    body { font-family: sans-serif; text-align: center; }
-    .slope-list, .slope-image { margin-top: 20px; }
+    body { 
+      font-family: sans-serif; 
+      text-align: center; 
+    }
+
+    .slope-list, .slope-image { 
+      margin-top: 2vh; 
+    }
+
     .slope-list div {
       display: inline-block;
-      margin: 10px;
+      margin: 2vw;
     }
+
     img {
-      width: 200px;
+      width: 20vw;   /* 画面幅に応じて自動調整 */
+      max-width: 200px; /* 大きすぎ防止 */
       height: auto;
-      border-radius: 10px;
+      border-radius: 1vw;
       display: block;
-      margin: 0 auto 5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      margin: 0 auto 1vh;
+      box-shadow: 0 0.3vw 0.8vw rgba(0,0,0,0.2);
     }
-    button { margin: 5px; padding: 10px 20px; cursor: pointer; }
+
+    button { 
+      margin: 1vw; 
+      padding: 1.5vw 3vw; /* 横幅に比例して大きさが変わる */
+      font-size: 2vw;     /* 文字も画面幅に比例して変わる */
+      border-radius: 1vw;
+      cursor: pointer;
+      border: 1px solid #666;
+      background: #f0f0f0;
+    }
   </style>
 </head>
 <body>
@@ -43,7 +61,6 @@
   <div class="slope-image" id="slopeImage"></div>
 
   <script>
-    // 段差の高さごとのスロープ候補データ
     const slopeData = {
       100: [
         { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
@@ -69,15 +86,17 @@
       ]
     };
 
-    // 段差の高さを選んだときの処理
+    let currentHeight = null;
+
     function showslope(height) {
+      currentHeight = height;
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
       slopeList.innerHTML = "";
       slopeImage.innerHTML = "";
 
-      // if文を使用してデータの存在確認
       if (slopeData[height]) {
+        slopeList.innerHTML = "<h3>スロープの種類を選んでください</h3>";
         slopeData[height].forEach(slope => {
           const div = document.createElement("div");
           const img = document.createElement("img");
@@ -91,6 +110,7 @@
             slopeImage.innerHTML = `<h2>${slope.name}のスロープ図</h2>
                                   <img src="${slope.slope}" alt="${slope.name}スロープ">
                                   <br><button onclick="reset()">戻る</button>`;
+            slopeList.innerHTML = "";
           };
 
           div.appendChild(img);
@@ -98,15 +118,17 @@
           slopeList.appendChild(div);
         });
       } else {
-        // データが存在しない場合の処理
         slopeList.innerHTML = "<p>該当する高さのスロープデータがありません。</p>";
       }
     }
 
-    // 戻るボタンでリセット
     function reset() {
-      document.getElementById("slopeList").innerHTML = "";
-      document.getElementById("slopeImage").innerHTML = "";
+      if (currentHeight) {
+        showslope(currentHeight);
+      } else {
+        document.getElementById("slopeList").innerHTML = "";
+        document.getElementById("slopeImage").innerHTML = "";
+      }
     }
   </script>
 </body>
