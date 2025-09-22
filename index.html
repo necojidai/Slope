@@ -25,7 +25,7 @@
   <h1>Slope</h1>
 
   <!-- 段差の高さ選択 -->
-  <div id="heightrMenu">
+  <div id="heightMenu">
     <h2>段差の高さを選んでください</h2>
     <button onclick="showslope(100)">100</button>
     <button onclick="showslope(200)">200</button>
@@ -41,59 +41,64 @@
   <div class="slope-image" id="slopeImage"></div>
 
   <script>
-    // 段差の高さごとの高所作業車候補データ
+    // 段差の高さごとのスロープ候補データ
     const slopeData = {
       100: [
         { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
-        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" } ,        
-        { name: "かるスロ", img: "images/kalusulo.jpg", cut: "images/kalusulo_slope.jpg" },  
-        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", cut: "images/sgdragon_slope.jpg" }
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope.jpg" },        
+        { name: "かるスロ", img: "images/kalusulo.jpg", slope: "images/kalusulo_slope.jpg" },  
+        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", slope: "images/sgdragon_slope.jpg" }
       ],
-
       200: [
         { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
-        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" } ,  
-        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", cut: "images/sgdragon_slope.jpg" }
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope.jpg" },  
+        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", slope: "images/sgdragon_slope.jpg" }
       ],
       300: [
         { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
-        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" }  
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope.jpg" }  
       ],
       450: [
         { name: "段差くん + 段差通路架台", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },     
-        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", cut: "images/alslopeDUO_slope.jpg" }  
-      ]     
+        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope.jpg" }  
+      ],
       650: [
-        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", cut: "images/sgdragon_slope.jpg" }
+        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon.jpg", slope: "images/sgdragon_slope.jpg" }
       ]
     };
 
     // 段差の高さを選んだときの処理
-    function showslope(100) {
+    function showslope(height) {
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
       slopeList.innerHTML = "";
       slopeImage.innerHTML = "";
 
-      slopeData[color].forEach(slope => {
-        const div = document.createElement("div");
-        const img = document.createElement("img");
-        const btn = document.createElement("button");
+      // if文を使用してデータの存在確認
+      if (slopeData[height]) {
+        slopeData[height].forEach(slope => {
+          const div = document.createElement("div");
+          const img = document.createElement("img");
+          const btn = document.createElement("button");
 
-        img.src = slope.img;
-        img.alt = slope.name;
+          img.src = slope.img;
+          img.alt = slope.name;
 
-        btn.textContent = slope.name;
-        btn.onclick = () => {
-          slopeImage.innerHTML = `<h2>${slope.name}のスロープ図</h2>
-                                <img src="${slope.slope}" alt="${slope.name}スロープ">
-                                <br><button onclick="reset()">戻る</button>`;
-        };
+          btn.textContent = slope.name;
+          btn.onclick = () => {
+            slopeImage.innerHTML = `<h2>${slope.name}のスロープ図</h2>
+                                  <img src="${slope.slope}" alt="${slope.name}スロープ">
+                                  <br><button onclick="reset()">戻る</button>`;
+          };
 
-        div.appendChild(img);
-        div.appendChild(btn);
-        slopeList.appendChild(div);
-      });
+          div.appendChild(img);
+          div.appendChild(btn);
+          slopeList.appendChild(div);
+        });
+      } else {
+        // データが存在しない場合の処理
+        slopeList.innerHTML = "<p>該当する高さのスロープデータがありません。</p>";
+      }
     }
 
     // 戻るボタンでリセット
