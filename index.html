@@ -7,6 +7,7 @@
     body { 
       font-family: sans-serif; 
       text-align: center; 
+      font-size: 1.2vw;
     }
 
     .slope-list, .slope-image { 
@@ -16,6 +17,7 @@
     .slope-list div {
       display: inline-block;
       margin: 2vw;
+      text-align: center;
     }
 
     img {
@@ -30,20 +32,40 @@
 
     button { 
       margin: 1vw; 
-      padding: 1.5vw 3vw;
-      font-size: 2vw;
-      border-radius: 1vw;
+      padding: 1.2vw 2.5vw;
+      font-size: 1.6vw;
+      border-radius: 0.8vw;
       cursor: pointer;
-      border: 1px solid #666;
+      border: 0.15vw solid #666;
       background: #f0f0f0;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #e0e0e0;
+    }
+
+    /* 選択中の高さボタン */
+    .active {
+      background: #4caf50;
+      color: white;
+      font-weight: bold;
+      border-color: #388e3c;
     }
 
     /* 現在の高さ表示 */
     #currentHeight {
       margin-top: 2vh;
-      font-size: 2.5vw;
+      font-size: 2vw;
       font-weight: bold;
       color: #333;
+    }
+
+    /* スロープ選択のタイトルを大きく */
+    .slope-list h3 {
+      font-size: 2vw;
+      margin-bottom: 2vh;
+      color: #444;
     }
   </style>
 </head>
@@ -102,6 +124,15 @@
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
       const heightLabel = document.getElementById("currentHeight");
+      const buttons = document.querySelectorAll("#heightMenu button");
+
+      // 選択中ボタンを強調
+      buttons.forEach(btn => {
+        btn.classList.remove("active");
+        if (btn.textContent == height) {
+          btn.classList.add("active");
+        }
+      });
 
       // 選択中の高さを表示
       heightLabel.textContent = `現在の高さ: ${height} mm`;
