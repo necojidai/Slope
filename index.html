@@ -19,8 +19,8 @@
     }
 
     img {
-      width: 20vw;   /* 画面幅に応じて自動調整 */
-      max-width: 200px; /* 大きすぎ防止 */
+      width: 20vw;
+      max-width: 200px;
       height: auto;
       border-radius: 1vw;
       display: block;
@@ -30,12 +30,20 @@
 
     button { 
       margin: 1vw; 
-      padding: 1.5vw 3vw; /* 横幅に比例して大きさが変わる */
-      font-size: 2vw;     /* 文字も画面幅に比例して変わる */
+      padding: 1.5vw 3vw;
+      font-size: 2vw;
       border-radius: 1vw;
       cursor: pointer;
       border: 1px solid #666;
       background: #f0f0f0;
+    }
+
+    /* 現在の高さ表示 */
+    #currentHeight {
+      margin-top: 2vh;
+      font-size: 2.5vw;
+      font-weight: bold;
+      color: #333;
     }
   </style>
 </head>
@@ -52,10 +60,11 @@
     <button onclick="showslope(650)">650</button>
   </div>
 
+  <!-- 現在の高さ表示 -->
+  <div id="currentHeight"></div>
+
   <!-- スロープ候補 -->
-  <div class="slope-list" id="slopeList">
- 　 <h3>スロープの種類を選んでください</h3>
-  </div>
+  <div class="slope-list" id="slopeList"></div>
 
   <!-- スロープ図 -->
   <div class="slope-image" id="slopeImage"></div>
@@ -92,6 +101,11 @@
       currentHeight = height;
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
+      const heightLabel = document.getElementById("currentHeight");
+
+      // 選択中の高さを表示
+      heightLabel.textContent = `現在の高さ: ${height} mm`;
+
       slopeList.innerHTML = "";
       slopeImage.innerHTML = "";
 
@@ -128,6 +142,7 @@
       } else {
         document.getElementById("slopeList").innerHTML = "";
         document.getElementById("slopeImage").innerHTML = "";
+        document.getElementById("currentHeight").textContent = "";
       }
     }
   </script>
