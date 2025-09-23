@@ -246,4 +246,39 @@
         slopeData[height].forEach(slope => {
           const div = document.createElement("div");
           const img = document.createElement("img");
-         
+          
+          img.src = slope.img;
+          img.alt = slope.name;
+
+          const btn = document.createElement("button");
+          btn.textContent = slope.name;
+          btn.onclick = () => {
+            slopeImage.innerHTML = `
+              <h2>${slope.name}のスロープ図</h2>
+              <img src="${slope.slope}" alt="${slope.name}スロープ">
+              <br><button class="back-button" onclick="reset()">戻る</button>
+            `;
+            slopeList.innerHTML = "";
+          };
+
+          div.appendChild(img);
+          div.appendChild(btn);
+          slopeList.appendChild(div);
+        });
+      } else {
+        slopeList.innerHTML = "<p>該当する高さのスロープデータがありません。</p>";
+      }
+    }
+
+    function reset() {
+      if (currentHeight) {
+        showslope(currentHeight);
+      } else {
+        document.getElementById("slopeList").innerHTML = "";
+        document.getElementById("slopeImage").innerHTML = "";
+        document.getElementById("currentHeight").textContent = "";
+      }
+    }
+  </script>
+</body>
+</html>  
