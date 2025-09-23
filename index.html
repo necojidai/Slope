@@ -110,6 +110,11 @@
       transition: transform 0.5s ease, z-index 0s ease 0s;
     }
 
+    /* hover時に色は変えず、拡大のみ */
+    .slope-list div:hover {
+      transform: scale(1.05);
+    }
+
     /* スロープの種類は選択しても色を変えない（activeは無効化） */
     .slope-list div.active {
       background: #ffffff;
