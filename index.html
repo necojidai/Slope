@@ -91,15 +91,16 @@
       align-items: center;
       text-align: center;
       width: 100%;
-      max-width: 400px; /* ← 幅を大きく */
+      max-width: 400px; /* 幅を大きく */
       cursor: pointer;
       border: 2px solid #1e88e5;
       border-radius: 0.8vw;
-      padding: 3vw; /* ← paddingも少し大きくして反応範囲拡大 */
+      padding: 3vw; /* paddingも少し大きくして反応範囲拡大 */
       transition: all 0.5s ease;
-      background: none;
+      background: #ffffff; /* 常に白色 */
       position: relative;
       z-index: 0;
+      color: #1e88e5; /* 文字色も固定 */
     }
 
     .slope-list div.expand {
@@ -113,10 +114,11 @@
       transform: scale(1.05);
     }
 
+    /* 選択しても色を変えないので active のスタイルは無効化 */
     .slope-list div.active {
-      background: #bbdefb;
-      border-color: #1565c0;
-      color: #1565c0;
+      background: #ffffff;
+      border-color: #1e88e5;
+      color: #1e88e5;
     }
 
     .slope-list div img {
@@ -179,19 +181,17 @@
       .slope-list { grid-template-columns: 1fr; gap: 4vw; }
       .slope-list div {
         padding: 4vw;
-        width: 95%; /* 幅を少し広げて反応範囲を大きく */
-        max-width: none; /* max-width制限を解除 */
+        width: 95%; 
+        max-width: none;
       }
       .slope-list div img { height: 50vw; }
-      .slope-list div h4 { font-size: 4.5vw; } /* スマホ文字少し大きく */
+      .slope-list div h4 { font-size: 4.5vw; } 
       .back-button,
       #heightMenu button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
       #currentHeight { font-size: 3vw; margin-top: 2vw; }
       .slope-image img { max-width: 95%; }
-
-      /* 選択時の枠を少し太くする */
       .slope-list div.active {
-        border-width: 3px;
+        border-width: 2px;
       }
     }
   </style>
@@ -245,11 +245,9 @@
     };
 
     let currentHeight = null;
-    let selectedSlopeName = null;
 
     function showslope(height) {
       currentHeight = height;
-      selectedSlopeName = null;
 
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
@@ -275,10 +273,7 @@
             div.classList.add("expand");
 
             setTimeout(() => {
-              document.querySelectorAll(".slope-list div").forEach(d => d.classList.remove("active"));
               div.classList.remove("expand");
-              div.classList.add("active");
-              selectedSlopeName = slope.name;
 
               slopeImage.innerHTML = `
                 <h2>${slope.name}　の スロープ図</h2>
