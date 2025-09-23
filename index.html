@@ -39,7 +39,7 @@
 
     #heightMenu button {
       margin: 1vw;
-      padding: 1.2vw 3vw;
+      padding: 1.2vw 3vw; /* 高さ幅を少し小さく */
       font-size: 2vw;
       border-radius: 1vw;
       cursor: pointer;
@@ -69,31 +69,28 @@
       color: #1565c0;
     }
 
-    /* スロープリストを横並び1行に */
-    .slope-list {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
+    .slope-list, .slope-image {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 2vw;
+      justify-items: center;
       margin: 3vh auto;
-      max-width: 95%;
-      overflow-x: auto; /* 横スクロール可能に */
-      padding-bottom: 2vh;
+      max-width: 90%;
     }
 
-    /* 各スロープを横並びのカード風に */
+    /* 各スロープの高さを揃える */
     .slope-list div {
-      flex: 0 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      max-width: 200px;
+      width: 100%;
+      max-width: 300px;
     }
 
     .slope-list div img {
       width: auto;
-      height: 15vw;
+      height: 15vw; /* 高さを統一 */
       object-fit: contain;
       border-radius: 0.8vw;
       background: #fff;
@@ -113,7 +110,6 @@
       font-weight: 600;
       transition: all 0.3s ease;
       width: 100%;
-      white-space: nowrap; /* ボタン文字を1行に */
     }
 
     .slope-list div button:hover,
@@ -167,12 +163,9 @@
       h2, h3 {
         font-size: 5vw;
       }
-      .slope-list {
-        flex-wrap: wrap; /* モバイルは折り返しOK */
-        justify-content: center;
-      }
-      .slope-list div {
-        max-width: 45%;
+      .slope-list, .slope-image {
+        grid-template-columns: 1fr;
+        gap: 4vw;
       }
       .slope-list div button,
       .back-button {
@@ -184,7 +177,7 @@
       #heightMenu button {
         width: 80vw;
         margin: 3vw auto;
-        padding: 3.5vw 0;
+        padding: 3.5vw 0; /* 高さを小さめに調整 */
         font-size: 5vw;
         border-radius: 2vw;
       }
@@ -193,7 +186,7 @@
         font-size: 5vw;
       }
       .slope-list div img {
-        height: 40vw;
+        height: 50vw;
       }
       .slope-image img {
         max-width: 95%;
@@ -257,7 +250,7 @@
 
     function showslope(height) {
       currentHeight = height;
-      selectedSlopeName = null;
+      selectedSlopeName = null; // 高さを変えたらリセット
 
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
@@ -265,7 +258,7 @@
       const buttons = document.querySelectorAll("#heightMenu button");
       const slopeTitle = document.getElementById("slopeTitle");
 
-      // 高さボタンのactive切り替え
+      // 高さボタンのactive切り替え（常に維持する）
       buttons.forEach(btn => {
         btn.classList.remove("active");
         if (btn.textContent == height) {
@@ -289,15 +282,18 @@
           const btn = document.createElement("button");
           btn.textContent = slope.name;
 
+          // 選択中なら色維持
           if (slope.name === selectedSlopeName) {
             btn.classList.add("active");
           }
 
           btn.onclick = () => {
+            // 既存のactive解除
             document.querySelectorAll("#slopeList button").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             selectedSlopeName = slope.name;
 
+            // 詳細を表示（高さボタンのactiveは維持される）
             slopeImage.innerHTML = `
               <h2>${slope.name}のスロープ図</h2>
               <img src="${slope.slope}" alt="${slope.name}スロープ">
@@ -311,7 +307,7 @@
           div.appendChild(btn);
           slopeList.appendChild(div);
         });
-        slopeList.style.display = "flex";
+        slopeList.style.display = "grid";
       } else {
         slopeList.innerHTML = "<p>該当する高さのスロープデータがありません。</p>";
       }
