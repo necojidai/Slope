@@ -40,7 +40,7 @@
 
     /* スロープタイトルの文字サイズを少し大きく */
     #slopeTitle h3 {
-      font-size: 2.5vw; /* 2vw → 2.5vw に変更 */
+      font-size: 2.5vw; /* PC用 */
     }
 
     #heightMenu {
@@ -72,9 +72,10 @@
       color: #1565c0;
     }
 
+    /* 現在の高さの文字サイズを小さく */
     #currentHeight {
       margin-top: 0.5vh;
-      font-size: 1.8vw;
+      font-size: 1.2vw; /* PC表示 */
       font-weight: bold;
       color: #1565c0;
     }
@@ -150,7 +151,7 @@
       display: block;
       max-width: 80%;
       height: auto;
-      margin: 0.5vh auto 2vh auto; /* 上マージンを小さく調整 */
+      margin: 0.5vh auto 2vh auto;
     }
 
     .back-button {
@@ -193,9 +194,10 @@
         font-size: 5vw;
         border-radius: 2vw;
       }
+      /* 現在の高さの文字サイズを小さく */
       #currentHeight {
         margin-top: 2vw;
-        font-size: 5vw;
+        font-size: 2.5vw; /* スマホ表示用に小さめ */
       }
       .slope-list div img {
         height: 50vw;
@@ -302,7 +304,6 @@
             btn.classList.add("active");
             selectedSlopeName = slope.name;
 
-            // 修正ポイント: 空白を入れる
             slopeImage.innerHTML = `
               <h2>${slope.name}　の スロープ図</h2>
               <img src="${slope.slope}" alt="${slope.name}スロープ">
