@@ -28,30 +28,8 @@
       font-weight: 500;
     }
 
-    .slope-list, .slope-image { 
-      margin-top: 3vh; 
-    }
-
-    /* 画像と名前のブロック */
-    .slope-list div {
-      display: inline-block;
-      margin: 2vw;
-      text-align: center;
-      background: none;
-      border: none;
-      padding: 0;
-      width: 20vw;
-      max-width: 280px;
-    }
-
-    .slope-list div img,
-    .slope-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 0.8vw;
-      display: block;
-      margin: 0 auto 1vh;
-      background: #fff;
+    #heightMenu {
+      margin-top: 3vh;
     }
 
     /* 高さ選択ボタン */
@@ -74,14 +52,44 @@
       transform: scale(1.1);
     }
 
-    /* 選択中の高さボタン */
     .active {
       background: #bbdefb;
       border-color: #1565c0;
       color: #1565c0;
     }
 
-    /* スロープ選択用ボタン */
+    /* 現在の高さ表示 */ 
+    #currentHeight {
+      margin-top: 0.5vh;
+      font-size: 1.8vw;
+      font-weight: bold;
+      color: #1565c0;
+    }
+
+    /* スロープ一覧のグリッド */
+    .slope-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 一行に2つ */
+      gap: 2vw;
+      justify-items: center;
+      margin: 3vh auto;
+      max-width: 90%;
+    }
+
+    .slope-list div {
+      text-align: center;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .slope-list div img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.8vw;
+      margin-bottom: 1vh;
+      background: #fff;
+    }
+
     .slope-list div button,
     .back-button {
       margin-top: 1vh;
@@ -103,12 +111,22 @@
       transform: scale(1.05);
     }
 
-    /* 現在の高さ表示 */ 
-    #currentHeight {
-      margin-top: 0.5vh;
-      font-size: 1.8vw;
-      font-weight: bold;
-      color: #1565c0;
+    /* スロープ画像表示（選択後）もグリッドに */
+    .slope-image {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 一行に2つ */
+      gap: 2vw;
+      justify-items: center;
+      margin: 3vh auto;
+      max-width: 90%;
+    }
+
+    .slope-image img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 0.8vw;
+      background: #fff;
     }
 
     /* スマホ向け調整 */
@@ -116,12 +134,18 @@
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
       h2 { font-size: 5vw; }
-      .slope-list div {
-        width: 85vw;
-        margin: 4vw auto;
+      .slope-list {
+        grid-template-columns: 1fr; /* 1列表示に */
+        gap: 4vw;
       }
-      img {
-        width: 100%;
+      .slope-image {
+        grid-template-columns: 1fr;
+        gap: 4vw;
+      }
+      .slope-list div button,
+      .back-button {
+        font-size: 4vw;
+        padding: 3vw 0;
         border-radius: 2vw;
       }
       #heightMenu button {
@@ -129,12 +153,6 @@
         margin: 3vw auto;
         padding: 5vw 0;
         font-size: 5vw;
-        border-radius: 2vw;
-      }
-      .slope-list div button,
-      .back-button {
-        font-size: 4vw;
-        padding: 3vw 0;
         border-radius: 2vw;
       }
       #currentHeight {
