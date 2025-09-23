@@ -214,6 +214,7 @@ function showslope(height) {
   const buttons = document.querySelectorAll("#heightMenu button");
   const slopeTitle = document.getElementById("slopeTitle");
 
+  // --- 高さボタンのactiveは段差ボタンのみ --- 
   buttons.forEach(btn => {
     btn.classList.remove("active");
     if (btn.textContent == height) btn.classList.add("active");
@@ -235,12 +236,13 @@ function showslope(height) {
       const btn = document.createElement("button");
       btn.textContent = slope.name;
       btn.onclick = () => {
+        // スロープ詳細を表示
         slopeImage.innerHTML = `
           <h2>${slope.name}のスロープ図</h2>
           <img src="${slope.slope}" alt="${slope.name}スロープ">
-          <button class="back-button" onclick="reset()">戻る</button>
+          <button class="back-button" onclick="backToList()">戻る</button>
         `;
-        slopeList.innerHTML = "";
+        slopeList.style.display = "none"; // スロープリストを非表示
         slopeTitle.style.display = "none"; // タイトルを非表示
       };
 
@@ -248,19 +250,15 @@ function showslope(height) {
       div.appendChild(btn);
       slopeList.appendChild(div);
     });
+    slopeList.style.display = "grid"; // 表示状態に戻す
   } else {
     slopeList.innerHTML = "<p>該当する高さのスロープデータがありません。</p>";
   }
 }
 
-function reset() {
+// --- 戻るボタン用関数 ---
+function backToList() {
   if (currentHeight) showslope(currentHeight);
-  else {
-    document.getElementById("slopeList").innerHTML = "";
-    document.getElementById("slopeImage").innerHTML = "";
-    document.getElementById("currentHeight").textContent = "";
-    document.getElementById("slopeTitle").style.display = "block";
-  }
 }
 </script>
 </body>
