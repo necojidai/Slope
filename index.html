@@ -68,15 +68,20 @@
     max-width: 90%;
   }
 
+  /* --- 各スロープの高さを揃える --- */
   .slope-list div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     width: 100%;
     max-width: 300px;
   }
 
-  .slope-list div img, .slope-image img {
-    width: 100%;
-    height: auto;
+  .slope-list div img {
+    width: auto;
+    height: 15vw; /* 高さを統一 */
+    object-fit: contain;
     border-radius: 0.8vw;
     background: #fff;
     margin-bottom: 1vh;
@@ -84,7 +89,7 @@
 
   .slope-list div button,
   .back-button {
-    margin-top: 1vh;
+    margin-top: auto; /* ボタンを下揃え */
     padding: 1vw 2vw;
     font-size: 1.3vw;
     border-radius: 0.6vw;
@@ -143,7 +148,8 @@
     .back-button { font-size: 4vw; padding: 3vw 0; border-radius: 2vw; min-width: 60vw; }
     #heightMenu button { width: 80vw; margin: 3vw auto; padding: 5vw 0; font-size: 5vw; border-radius: 2vw; }
     #currentHeight { margin-top: 2vw; font-size: 5vw; }
-    .slope-image img { max-width: 95%; } /* スマホでは画面いっぱいに近く */
+    .slope-list div img { height: 50vw; } /* スマホでは高さを調整 */
+    .slope-image img { max-width: 95%; } 
   }
 </style>
 </head>
