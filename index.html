@@ -8,7 +8,7 @@
       font-family: "Segoe UI", "Helvetica Neue", sans-serif;
       text-align: center; 
       margin: 0;
-      background: #ffffff; /* 背景を真っ白 */
+      background: #ffffff; /* 背景を真っ白に */
       color: #222;
     }
 
@@ -37,8 +37,8 @@
       display: inline-block;
       margin: 2vw;
       text-align: center;
-      background: none; /* 背景削除 */
-      border: none; /* 枠線削除 */
+      background: none;
+      border: none;
       padding: 0;
       width: 20vw;
       max-width: 280px;
@@ -57,7 +57,7 @@
     /* 高さ選択ボタン */
     #heightMenu button { 
       margin: 1vw; 
-      padding: 2vw 4vw; /* ボタンを大きめに */
+      padding: 2vw 4vw;
       font-size: 2vw;
       border-radius: 1vw;
       cursor: pointer;
@@ -82,7 +82,8 @@
     }
 
     /* スロープ選択用ボタン */
-    .slope-list div button {
+    .slope-list div button,
+    .back-button {
       margin-top: 1vh;
       padding: 1vw 2vw;
       font-size: 1.3vw;
@@ -96,7 +97,8 @@
       width: 100%;
     }
 
-    .slope-list div button:hover {
+    .slope-list div button:hover,
+    .back-button:hover {
       background: #e3f2fd;
       transform: scale(1.05);
     }
@@ -129,7 +131,8 @@
         font-size: 5vw;
         border-radius: 2vw;
       }
-      .slope-list div button {
+      .slope-list div button,
+      .back-button {
         font-size: 4vw;
         padding: 3vw 0;
         border-radius: 2vw;
@@ -224,7 +227,7 @@
           btn.onclick = () => {
             slopeImage.innerHTML = `<h2>${slope.name}のスロープ図</h2>
                                   <img src="${slope.slope}" alt="${slope.name}スロープ">
-                                  <br><button onclick="reset()">戻る</button>`;
+                                  <br><button class="back-button" onclick="reset()">戻る</button>`;
             slopeList.innerHTML = "";
           };
 
