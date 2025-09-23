@@ -121,6 +121,15 @@
       max-width: 90%;
     }
 
+    .slope-image h2,
+    .slope-list h3 {
+      grid-column: 1 / -1; /* 一行に中央表示 */
+      text-align: center;
+      margin-bottom: 2vh;
+      font-weight: 500;
+      color: #333;
+    }
+
     .slope-image img {
       width: 100%;
       max-width: 300px;
@@ -133,7 +142,7 @@
     @media (max-width: 600px) {
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
-      h2 { font-size: 5vw; }
+      h2, h3 { font-size: 5vw; }
       .slope-list {
         grid-template-columns: 1fr; /* 1列表示に */
         gap: 4vw;
@@ -232,41 +241,9 @@
       slopeImage.innerHTML = "";
 
       if (slopeData[height]) {
+        // スロープ一覧上部に中央表示文言
         slopeList.innerHTML = "<h3>スロープの種類を選んでください</h3>";
         slopeData[height].forEach(slope => {
           const div = document.createElement("div");
           const img = document.createElement("img");
-          const btn = document.createElement("button");
-
-          img.src = slope.img;
-          img.alt = slope.name;
-
-          btn.textContent = slope.name;
-          btn.onclick = () => {
-            slopeImage.innerHTML = `<h2>${slope.name}のスロープ図</h2>
-                                  <img src="${slope.slope}" alt="${slope.name}スロープ">
-                                  <br><button class="back-button" onclick="reset()">戻る</button>`;
-            slopeList.innerHTML = "";
-          };
-
-          div.appendChild(img);
-          div.appendChild(btn);
-          slopeList.appendChild(div);
-        });
-      } else {
-        slopeList.innerHTML = "<p>該当する高さのスロープデータがありません。</p>";
-      }
-    }
-
-    function reset() {
-      if (currentHeight) {
-        showslope(currentHeight);
-      } else {
-        document.getElementById("slopeList").innerHTML = "";
-        document.getElementById("slopeImage").innerHTML = "";
-        document.getElementById("currentHeight").textContent = "";
-      }
-    }
-  </script>
-</body>
-</html>
+         
