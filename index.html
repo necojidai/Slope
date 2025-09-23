@@ -28,6 +28,11 @@
       font-weight: 500;
     }
 
+    /* h2 の margin を小さくして画像との隙間を縮める */
+    .slope-image h2 {
+      margin-bottom: 0.5vh;
+    }
+
     /* h3を1行表示 */
     .slope-list h3 {
       white-space: nowrap;
@@ -39,7 +44,7 @@
 
     #heightMenu button {
       margin: 1vw;
-      padding: 1.2vw 3vw; /* 高さ幅を少し小さく */
+      padding: 1.2vw 3vw;
       font-size: 2vw;
       border-radius: 1vw;
       cursor: pointer;
@@ -90,7 +95,7 @@
 
     .slope-list div img {
       width: auto;
-      height: 15vw; /* 高さを統一 */
+      height: 15vw;
       object-fit: contain;
       border-radius: 0.8vw;
       background: #fff;
@@ -122,7 +127,6 @@
     .slope-image h2 {
       grid-column: 1 / -1;
       text-align: center;
-      margin-bottom: 2vh;
       font-weight: 500;
       color: #333;
     }
@@ -141,7 +145,7 @@
       display: block;
       max-width: 80%;
       height: auto;
-      margin: 2vh auto;
+      margin: 0.5vh auto 2vh auto; /* 上マージンを小さく調整 */
     }
 
     .back-button {
@@ -177,7 +181,7 @@
       #heightMenu button {
         width: 80vw;
         margin: 3vw auto;
-        padding: 3.5vw 0; /* 高さを小さめに調整 */
+        padding: 3.5vw 0;
         font-size: 5vw;
         border-radius: 2vw;
       }
@@ -250,7 +254,7 @@
 
     function showslope(height) {
       currentHeight = height;
-      selectedSlopeName = null; // 高さを変えたらリセット
+      selectedSlopeName = null;
 
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
@@ -258,7 +262,6 @@
       const buttons = document.querySelectorAll("#heightMenu button");
       const slopeTitle = document.getElementById("slopeTitle");
 
-      // 高さボタンのactive切り替え（常に維持する）
       buttons.forEach(btn => {
         btn.classList.remove("active");
         if (btn.textContent == height) {
@@ -282,18 +285,15 @@
           const btn = document.createElement("button");
           btn.textContent = slope.name;
 
-          // 選択中なら色維持
           if (slope.name === selectedSlopeName) {
             btn.classList.add("active");
           }
 
           btn.onclick = () => {
-            // 既存のactive解除
             document.querySelectorAll("#slopeList button").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             selectedSlopeName = slope.name;
 
-            // 詳細を表示（高さボタンのactiveは維持される）
             slopeImage.innerHTML = `
               <h2>${slope.name}のスロープ図</h2>
               <img src="${slope.slope}" alt="${slope.name}スロープ">
