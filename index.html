@@ -103,15 +103,42 @@
     color: #333;
   }
 
+  /* --- スロープ画像と戻るボタンを中央寄せ --- */
+  .slope-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+    margin: 3vh auto;
+  }
+
+  .slope-image img {
+    display: block;
+    max-width: 80%;   /* 適度な余白を確保 */
+    height: auto;
+    margin: 2vh auto; /* 中央寄せ */
+  }
+
+  .back-button {
+    display: inline-block;
+    margin: 2vh auto;
+    width: auto;
+    min-width: 150px;
+    font-size: 1.5vw;
+    padding: 1vh 2vw;
+  }
+
   @media (max-width: 600px) {
     body { font-size: 4vw; }
     h1 { font-size: 7vw; }
     h2, h3 { font-size: 5vw; }
     .slope-list, .slope-image { grid-template-columns: 1fr; gap: 4vw; }
     .slope-list div button,
-    .back-button { font-size: 4vw; padding: 3vw 0; border-radius: 2vw; }
+    .back-button { font-size: 4vw; padding: 3vw 0; border-radius: 2vw; min-width: 60vw; }
     #heightMenu button { width: 80vw; margin: 3vw auto; padding: 5vw 0; font-size: 5vw; border-radius: 2vw; }
     #currentHeight { margin-top: 2vw; font-size: 5vw; }
+    .slope-image img { max-width: 95%; } /* スマホでは画面いっぱいに近く */
   }
 </style>
 </head>
@@ -122,15 +149,14 @@
   <h2>段差の高さ（mm）を選んでください</h2>
   <button onclick="showslope(100)">100</button>
   <button onclick="showslope(200)">200</button>
-  <button onclick="showslope(300)">300</button>  
+  <button onclick="showslope(300)">300</button>
   <button onclick="showslope(450)">450</button>
   <button onclick="showslope(650)">650</button>
 </div>
 
 <div id="currentHeight"></div>
 
-<div class="slope-list" id="slopeList"></div>
-<div class="slope-image" id="slopeImage"></div>
+<div class="slope-list" id="slopeList"></div> <div class="slope-image" id="slopeImage"></div>
 
 <script>
 const slopeData = {
@@ -178,7 +204,6 @@ function showslope(height) {
   slopeImage.innerHTML = "";
 
   if (slopeData[height]) {
-    // 一行で中央表示
     const headerDiv = document.createElement("div");
     headerDiv.innerHTML = "<h3>スロープの種類を選んでください</h3>";
     slopeList.appendChild(headerDiv);
@@ -195,7 +220,7 @@ function showslope(height) {
         slopeImage.innerHTML = `
           <h2>${slope.name}のスロープ図</h2>
           <img src="${slope.slope}" alt="${slope.name}スロープ">
-          <br><button class="back-button" onclick="reset()">戻る</button>
+          <button class="back-button" onclick="reset()">戻る</button>
         `;
         slopeList.innerHTML = "";
       };
