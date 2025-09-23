@@ -63,7 +63,8 @@
       transform: scale(1.1);
     }
 
-    .active {
+    /* 段差の高さボタンは選択時に青色になる */
+    #heightMenu button.active {
       background: #bbdefb;
       border-color: #1565c0;
       color: #1565c0;
@@ -91,16 +92,16 @@
       align-items: center;
       text-align: center;
       width: 100%;
-      max-width: 700px; /* 幅を大きく */
+      max-width: 700px;
       cursor: pointer;
       border: 2px solid #1e88e5;
       border-radius: 0.8vw;
-      padding: 2.5vw; /* paddingも少し大きくして反応範囲拡大 */
+      padding: 2.5vw;
       transition: all 0.5s ease;
-      background: #ffffff; /* 常に白色 */
+      background: #ffffff;
       position: relative;
       z-index: 0;
-      color: #1e88e5; /* 文字色も固定 */
+      color: #1e88e5;
     }
 
     .slope-list div.expand {
@@ -114,7 +115,7 @@
       transform: scale(1.05);
     }
 
-    /* 選択しても色を変えないので active のスタイルは無効化 */
+    /* スロープの種類は選択しても色を変えない（activeは無効化） */
     .slope-list div.active {
       background: #ffffff;
       border-color: #1e88e5;
