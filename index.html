@@ -167,7 +167,15 @@
 
 <div id="currentHeight"></div>
 
+<!-- スロープ選択タイトル -->
+<div id="slopeTitle">
+  <h3>スロープの種類を選んでください</h3>
+</div>
+
+<!-- スロープの種類選択リスト -->
 <div class="slope-list" id="slopeList"></div> 
+
+<!-- 選択したスロープの詳細画像 -->
 <div class="slope-image" id="slopeImage"></div>
 
 <script>
@@ -204,6 +212,7 @@ function showslope(height) {
   const slopeImage = document.getElementById("slopeImage");
   const heightLabel = document.getElementById("currentHeight");
   const buttons = document.querySelectorAll("#heightMenu button");
+  const slopeTitle = document.getElementById("slopeTitle");
 
   buttons.forEach(btn => {
     btn.classList.remove("active");
@@ -214,12 +223,9 @@ function showslope(height) {
 
   slopeList.innerHTML = "";
   slopeImage.innerHTML = "";
+  slopeTitle.style.display = "block"; // タイトルを表示
 
   if (slopeData[height]) {
-    const headerDiv = document.createElement("div");
-    headerDiv.innerHTML = "<h3>スロープの種類を選んでください</h3>";
-    slopeList.appendChild(headerDiv);
-
     slopeData[height].forEach(slope => {
       const div = document.createElement("div");
       const img = document.createElement("img");
@@ -235,6 +241,7 @@ function showslope(height) {
           <button class="back-button" onclick="reset()">戻る</button>
         `;
         slopeList.innerHTML = "";
+        slopeTitle.style.display = "none"; // タイトルを非表示
       };
 
       div.appendChild(img);
@@ -252,6 +259,7 @@ function reset() {
     document.getElementById("slopeList").innerHTML = "";
     document.getElementById("slopeImage").innerHTML = "";
     document.getElementById("currentHeight").textContent = "";
+    document.getElementById("slopeTitle").style.display = "block";
   }
 }
 </script>
