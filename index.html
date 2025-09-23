@@ -205,9 +205,11 @@ const slopeData = {
 };
 
 let currentHeight = null;
+let selectedSlopeName = null;
 
 function showslope(height) {
   currentHeight = height;
+  selectedSlopeName = null; // 高さを変えたらスロープ選択をリセット
   const slopeList = document.getElementById("slopeList");
   const slopeImage = document.getElementById("slopeImage");
   const heightLabel = document.getElementById("currentHeight");
@@ -235,7 +237,19 @@ function showslope(height) {
 
       const btn = document.createElement("button");
       btn.textContent = slope.name;
+
+      // 選択中なら色を維持
+      if (slope.name === selectedSlopeName) {
+        btn.classList.add("active");
+      }
+
       btn.onclick = () => {
+        // まず全スロープボタンのactiveを外す
+        document.querySelectorAll("#slopeList button").forEach(b => b.classList.remove("active"));
+        // 今クリックしたボタンにactiveを付ける
+        btn.classList.add("active");
+        selectedSlopeName = slope.name;
+
         // スロープ詳細を表示
         slopeImage.innerHTML = `
           <h2>${slope.name}のスロープ図</h2>
