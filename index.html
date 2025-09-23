@@ -302,8 +302,9 @@
             btn.classList.add("active");
             selectedSlopeName = slope.name;
 
+            // 修正ポイント: 空白を入れる
             slopeImage.innerHTML = `
-              <h2>${slope.name}のスロープ図</h2>
+              <h2>${slope.name}　の スロープ図</h2>
               <img src="${slope.slope}" alt="${slope.name}スロープ">
               <button class="back-button" onclick="backToList()">戻る</button>
             `;
