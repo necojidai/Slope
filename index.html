@@ -36,9 +36,8 @@
       white-space: nowrap;
     }
 
-    /* PC版でスロープタイトルを小さく */
     #slopeTitle h3 {
-      font-size: 2vw; /* 元の2.5vwより小さく */
+      font-size: 2vw;
     }
 
     #heightMenu {
@@ -176,15 +175,24 @@
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
       h2, h3 { font-size: 5vw; }
-      #slopeTitle h3 { font-size: 5vw; } /* スマホは大きめ表示 */
+      #slopeTitle h3 { font-size: 5vw; }
       .slope-list { grid-template-columns: 1fr; gap: 4vw; }
-      .slope-list div { padding: 4vw; }
+      .slope-list div {
+        padding: 4vw;
+        width: 95%; /* 幅を少し広げて反応範囲を大きく */
+        max-width: none; /* max-width制限を解除 */
+      }
       .slope-list div img { height: 50vw; }
-      .slope-list div h4 { font-size: 4vw; }
+      .slope-list div h4 { font-size: 4.5vw; } /* ← 文字サイズを少し大きく */
       .back-button,
       #heightMenu button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
       #currentHeight { font-size: 3vw; margin-top: 2vw; }
       .slope-image img { max-width: 95%; }
+
+      /* 選択時の枠を少し太くする */
+      .slope-list div.active {
+        border-width: 3px;
+      }
     }
   </style>
 </head>
