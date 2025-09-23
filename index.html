@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Slope - Line Art Style</title>
+<title>Slope - Multi Select</title>
 <style>
   body { 
     font-family: "Segoe UI", "Helvetica Neue", sans-serif;
@@ -54,7 +54,7 @@
     color: #1565c0;
   }
 
-  .slope-list, .slope-image {
+  .slope-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2vw;
@@ -69,7 +69,7 @@
     max-width: 300px;
   }
 
-  .slope-list div img, .slope-image img {
+  .slope-list div img {
     width: 100%;
     height: auto;
     border-radius: 0.8vw;
@@ -77,8 +77,7 @@
     margin-bottom: 1vh;
   }
 
-  .slope-list div button,
-  .back-button {
+  .slope-list div button {
     margin-top: 1vh;
     padding: 1vw 2vw;
     font-size: 1.3vw;
@@ -92,8 +91,16 @@
     width: 100%;
   }
 
-  .slope-list div button:hover,
-  .back-button:hover { background: #e3f2fd; transform: scale(1.05); }
+  .slope-list div button:hover { background: #e3f2fd; transform: scale(1.05); }
+
+  .slope-image {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2vw;
+    justify-items: center;
+    margin: 3vh auto;
+    max-width: 90%;
+  }
 
   .slope-list h3, .slope-image h2 {
     grid-column: 1 / -1;
@@ -108,8 +115,7 @@
     h1 { font-size: 7vw; }
     h2, h3 { font-size: 5vw; }
     .slope-list, .slope-image { grid-template-columns: 1fr; gap: 4vw; }
-    .slope-list div button,
-    .back-button { font-size: 4vw; padding: 3vw 0; border-radius: 2vw; }
+    .slope-list div button { font-size: 4vw; padding: 3vw 0; border-radius: 2vw; }
     #heightMenu button { width: 80vw; margin: 3vw auto; padding: 5vw 0; font-size: 5vw; border-radius: 2vw; }
     #currentHeight { margin-top: 2vw; font-size: 5vw; }
   }
@@ -159,6 +165,7 @@ const slopeData = {
 };
 
 let currentHeight = null;
+let selectedSlopes = [];
 
 function showslope(height) {
   currentHeight = height;
@@ -166,24 +173,23 @@ function showslope(height) {
   const slopeImage = document.getElementById("slopeImage");
   const heightLabel = document.getElementById("currentHeight");
   const buttons = document.querySelectorAll("#heightMenu button");
-
+  
   buttons.forEach(btn => {
     btn.classList.remove("active");
     if (btn.textContent == height) btn.classList.add("active");
   });
 
   heightLabel.textContent = `現在の高さ: ${height} mm`;
-
   slopeList.innerHTML = "";
   slopeImage.innerHTML = "";
+  selectedSlopes = [];
 
   if (slopeData[height]) {
-    // 一行で中央表示
     const headerDiv = document.createElement("div");
-    headerDiv.innerHTML = "<h3>スロープの種類を選んでください</h3>";
+    headerDiv.innerHTML = "<h3>スロープの種類を選んでください（複数選択可）</h3>";
     slopeList.appendChild(headerDiv);
 
-    slopeData[height].forEach(slope => {
+    slopeData[height].forEach((slope, index) => {
       const div = document.createElement("div");
       const img = document.createElement("img");
       img.src = slope.img;
@@ -191,14 +197,7 @@ function showslope(height) {
 
       const btn = document.createElement("button");
       btn.textContent = slope.name;
-      btn.onclick = () => {
-        slopeImage.innerHTML = `
-          <h2>${slope.name}のスロープ図</h2>
-          <img src="${slope.slope}" alt="${slope.name}スロープ">
-          <br><button class="back-button" onclick="reset()">戻る</button>
-        `;
-        slopeList.innerHTML = "";
-      };
+      btn.onclick = () => toggleSlope(index);
 
       div.appendChild(img);
       div.appendChild(btn);
@@ -209,13 +208,27 @@ function showslope(height) {
   }
 }
 
-function reset() {
-  if (currentHeight) showslope(currentHeight);
-  else {
-    document.getElementById("slopeList").innerHTML = "";
-    document.getElementById("slopeImage").innerHTML = "";
-    document.getElementById("currentHeight").textContent = "";
+function toggleSlope(index) {
+  const slope = slopeData[currentHeight][index];
+  const selectedIndex = selectedSlopes.indexOf(slope);
+
+  if (selectedIndex === -1) {
+    selectedSlopes.push(slope);
+  } else {
+    selectedSlopes.splice(selectedIndex, 1);
   }
+  renderSelectedSlopes();
+}
+
+function renderSelectedSlopes() {
+  const slopeImage = document.getElementById("slopeImage");
+  slopeImage.innerHTML = "<h2>選択したスロープのスロープ図</h2>";
+
+  selectedSlopes.forEach(slope => {
+    slopeImage.innerHTML += `
+      <img src="${slope.slope}" alt="${slope.name}スロープ">
+    `;
+  });
 }
 </script>
 </body>
