@@ -258,10 +258,12 @@
       const buttons = document.querySelectorAll("#heightMenu button");
       const slopeTitle = document.getElementById("slopeTitle");
 
-      // 高さボタンのactive切り替え
+      // 高さボタンのactive切り替え（常に維持する）
       buttons.forEach(btn => {
         btn.classList.remove("active");
-        if (btn.textContent == height) btn.classList.add("active");
+        if (btn.textContent == height) {
+          btn.classList.add("active");
+        }
       });
 
       heightLabel.textContent = `現在の高さ: ${height} mm`;
@@ -291,7 +293,7 @@
             btn.classList.add("active");
             selectedSlopeName = slope.name;
 
-            // 詳細を表示
+            // 詳細を表示（高さボタンのactiveは維持される）
             slopeImage.innerHTML = `
               <h2>${slope.name}のスロープ図</h2>
               <img src="${slope.slope}" alt="${slope.name}スロープ">
@@ -312,7 +314,9 @@
     }
 
     function backToList() {
-      if (currentHeight) showslope(currentHeight);
+      if (currentHeight) {
+        showslope(currentHeight);
+      }
     }
   </script>
 </body>
