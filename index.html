@@ -28,6 +28,11 @@
     font-weight: 500;
   }
 
+  /* --- ここでh3を1行表示に --- */
+  .slope-list h3 {
+    white-space: nowrap;
+  }
+
   #heightMenu { margin-top: 3vh; }
 
   #heightMenu button { 
@@ -156,7 +161,8 @@
 
 <div id="currentHeight"></div>
 
-<div class="slope-list" id="slopeList"></div> <div class="slope-image" id="slopeImage"></div>
+<div class="slope-list" id="slopeList"></div> 
+<div class="slope-image" id="slopeImage"></div>
 
 <script>
 const slopeData = {
