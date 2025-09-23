@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Slope - Line Art Style</title>
   <style>
+    * {
+      box-sizing: border-box; /* padding込みで幅を計算 */
+    }
+
     body {
       font-family: "Segoe UI", "Helvetica Neue", sans-serif;
       text-align: center;
@@ -63,7 +67,6 @@
       transform: scale(1.1);
     }
 
-    /* 段差の高さボタンは選択時に青色になる */
     #heightMenu button.active {
       background: #bbdefb;
       border-color: #1565c0;
@@ -110,12 +113,10 @@
       transition: transform 0.5s ease, z-index 0s ease 0s;
     }
 
-    /* hover時に色は変えず、拡大のみ */
     .slope-list div:hover {
       transform: scale(1.05);
     }
 
-    /* スロープの種類は選択しても色を変えない（activeは無効化） */
     .slope-list div.active {
       background: #ffffff;
       border-color: #1e88e5;
@@ -179,21 +180,26 @@
       h1 { font-size: 7vw; }
       h2, h3 { font-size: 5vw; }
       #slopeTitle h3 { font-size: 5vw; }
-      .slope-list { grid-template-columns: 1fr; gap: 4vw; }
-      .slope-list div {
-        padding: 3vw;
-        width: 90%; 
-        max-width: 200px;
+
+      /* スマホ版：1列にして幅100%以内に収める */
+      .slope-list {
+        grid-template-columns: 1fr;
+        gap: 3vw;
+        padding: 0 2vw;
       }
+      .slope-list div {
+        width: 100%;
+        max-width: 100%;
+        padding: 4vw;
+      }
+
       .slope-list div img { height: 50vw; }
-      .slope-list div h4 { font-size: 4.5vw; } 
+      .slope-list div h4 { font-size: 4.5vw; }
       .back-button,
       #heightMenu button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
       #currentHeight { font-size: 3vw; margin-top: 2vw; }
       .slope-image img { max-width: 95%; }
-      .slope-list div.active {
-        border-width: 2px;
-      }
+      .slope-list div.active { border-width: 2px; }
     }
   </style>
 </head>
