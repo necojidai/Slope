@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <title>Slope - Line Art Style</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: "Segoe UI", "Helvetica Neue", sans-serif;
@@ -16,38 +14,13 @@
       color: #222;
     }
 
-    h1 {
-      font-size: 3vw;
-      margin: 2vh 0;
-      font-weight: 700;
-      color: #111;
-      border-bottom: 2px solid #222;
-      display: inline-block;
-      padding-bottom: 0.5vh;
-    }
+    h1 { font-size: 3vw; margin: 2vh 0; font-weight: 700; color: #111; border-bottom: 2px solid #222; display: inline-block; padding-bottom: 0.5vh; }
+    h2, h3 { color: #333; margin-bottom: 2vh; font-weight: 500; }
+    .slope-image h2 { margin-bottom: 0.5vh; }
+    .slope-list h3 { white-space: nowrap; }
+    #slopeTitle h3 { font-size: 2vw; }
 
-    h2, h3 {
-      color: #333;
-      margin-bottom: 2vh;
-      font-weight: 500;
-    }
-
-    .slope-image h2 {
-      margin-bottom: 0.5vh;
-    }
-
-    .slope-list h3 {
-      white-space: nowrap;
-    }
-
-    #slopeTitle h3 {
-      font-size: 2vw;
-    }
-
-    #heightMenu {
-      margin-top: 3vh;
-    }
-
+    #heightMenu { margin-top: 3vh; }
     #heightMenu button {
       margin: 1vw;
       padding: 1.2vw 3vw;
@@ -61,24 +34,10 @@
       transition: all 0.3s ease;
       min-width: 8vw;
     }
+    #heightMenu button:hover { background: #e3f2fd; transform: scale(1.1); }
+    #heightMenu button.active { background: #bbdefb; border-color: #1565c0; color: #1565c0; }
 
-    #heightMenu button:hover {
-      background: #e3f2fd;
-      transform: scale(1.1);
-    }
-
-    #heightMenu button.active {
-      background: #bbdefb;
-      border-color: #1565c0;
-      color: #1565c0;
-    }
-
-    #currentHeight {
-      margin-top: 0.5vh;
-      font-size: 1.2vw;
-      font-weight: bold;
-      color: #1565c0;
-    }
+    #currentHeight { margin-top: 0.5vh; font-size: 1.2vw; font-weight: bold; color: #1565c0; }
 
     .slope-list {
       display: grid;
@@ -100,18 +59,21 @@
       border: 2px solid #1e88e5;
       border-radius: 0.8vw;
       padding: 2.5vw;
-      transition: all 0.5s ease;
+      transition: all 0.4s ease;
       background: #ffffff;
       position: relative;
       z-index: 0;
       color: #1e88e5;
     }
 
-    /* PC版拡大効果：背景色・シャドウなし、scaleのみ */
+    /* 強化版拡大効果 */
     .slope-list div.expand {
-      transform: scale(1.3);
-      z-index: 10;
-      transition: transform 0.5s ease, z-index 0s ease 0s;
+      transform: scale(1.5) rotate(-2deg);
+      z-index: 20;
+      border-color: #1565c0;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+      background: #e3f2fd;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
     }
 
     .slope-list div:hover {
@@ -124,36 +86,11 @@
       color: #1e88e5;
     }
 
-    .slope-list div img {
-      width: auto;
-      height: 15vw;
-      object-fit: contain;
-      border-radius: 0.8vw;
-      margin-bottom: 1vh;
-    }
+    .slope-list div img { width: auto; height: 15vw; object-fit: contain; border-radius: 0.8vw; margin-bottom: 1vh; }
+    .slope-list div h4 { font-size: 1.3vw; font-weight: 600; color: #1e88e5; margin: 0; }
 
-    .slope-list div h4 {
-      font-size: 1.3vw;
-      font-weight: 600;
-      color: #1e88e5;
-      margin: 0;
-    }
-
-    .slope-image {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      max-width: 90%;
-      margin: 3vh auto;
-    }
-
-    .slope-image img {
-      display: block;
-      max-width: 80%;
-      height: auto;
-      margin: 0.5vh auto 2vh auto;
-    }
+    .slope-image { display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 90%; margin: 3vh auto; }
+    .slope-image img { display: block; max-width: 80%; height: auto; margin: 0.5vh auto 2vh auto; }
 
     .back-button {
       display: inline-block;
@@ -170,11 +107,7 @@
       font-weight: 600;
       transition: all 0.3s ease;
     }
-
-    .back-button:hover {
-      background: #e3f2fd;
-      transform: scale(1.05);
-    }
+    .back-button:hover { background: #e3f2fd; transform: scale(1.05); }
 
     @media (max-width: 600px) {
       body { font-size: 4vw; }
@@ -182,29 +115,11 @@
       h2, h3 { font-size: 5vw; }
       #slopeTitle h3 { font-size: 5vw; }
 
-      /* スマホ版：1列にして幅100%以内に収める */
-      .slope-list {
-        grid-template-columns: 1fr;
-        gap: 3vw;
-        padding: 0 2vw;
-      }
-      .slope-list div {
-        width: 100%;
-        max-width: 100%;
-        padding: 4vw;
-      }
-
+      .slope-list { grid-template-columns: 1fr; gap: 3vw; padding: 0 2vw; }
+      .slope-list div { width: 100%; max-width: 100%; padding: 4vw; }
       .slope-list div img { height: 50vw; }
       .slope-list div h4 { font-size: 4.5vw; }
-
-      /* スマホ版拡大効果：背景色・シャドウなし、scale + 軽く回転 */
-      .slope-list div.expand {
-        transform: scale(1.5) rotate(-2deg);
-        z-index: 10;
-      }
-
-      .back-button,
-      #heightMenu button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
+      .back-button, #heightMenu button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
       #currentHeight { font-size: 3vw; margin-top: 2vw; }
       .slope-image img { max-width: 95%; }
       .slope-list div.active { border-width: 2px; }
@@ -224,13 +139,8 @@
   </div>
 
   <div id="currentHeight"></div>
-
-  <div id="slopeTitle">
-    <h3>スロープの種類を選んでください</h3>
-  </div>
-
+  <div id="slopeTitle"><h3>スロープの種類を選んでください</h3></div>
   <div class="slope-list" id="slopeList"></div>
-
   <div class="slope-image" id="slopeImage"></div>
 
   <script>
@@ -263,7 +173,6 @@
 
     function showslope(height) {
       currentHeight = height;
-
       const slopeList = document.getElementById("slopeList");
       const slopeImage = document.getElementById("slopeImage");
       const heightLabel = document.getElementById("currentHeight");
@@ -276,7 +185,6 @@
       });
 
       heightLabel.textContent = `現在の高さ: ${height} mm`;
-
       slopeList.innerHTML = "";
       slopeImage.innerHTML = "";
       slopeTitle.style.display = "block";
@@ -286,30 +194,16 @@
           const div = document.createElement("div");
           div.onclick = () => {
             div.classList.add("expand");
-
             setTimeout(() => {
               div.classList.remove("expand");
-
-              slopeImage.innerHTML = `
-                <h2>${slope.name}　の スロープ図</h2>
-                <img src="${slope.slope}" alt="${slope.name}スロープ">
-                <button class="back-button" onclick="backToList()">戻る</button>
-              `;
+              slopeImage.innerHTML = `<h2>${slope.name} の スロープ図</h2><img src="${slope.slope}" alt="${slope.name}スロープ"><button class="back-button" onclick="backToList()">戻る</button>`;
               slopeList.style.display = "none";
               slopeTitle.style.display = "none";
-            }, 500);
+            }, 400);
           };
-
-          const img = document.createElement("img");
-          img.src = slope.img;
-          img.alt = slope.name;
-
-          const nameLabel = document.createElement("h4");
-          nameLabel.textContent = slope.name;
-
-          div.appendChild(img);
-          div.appendChild(nameLabel);
-          slopeList.appendChild(div);
+          const img = document.createElement("img"); img.src = slope.img; img.alt = slope.name;
+          const nameLabel = document.createElement("h4"); nameLabel.textContent = slope.name;
+          div.appendChild(img); div.appendChild(nameLabel); slopeList.appendChild(div);
         });
         slopeList.style.display = "grid";
       } else {
@@ -317,9 +211,7 @@
       }
     }
 
-    function backToList() {
-      if (currentHeight) showslope(currentHeight);
-    }
+    function backToList() { if (currentHeight) showslope(currentHeight); }
   </script>
 </body>
 </html>
