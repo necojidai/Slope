@@ -36,8 +36,9 @@
       white-space: nowrap;
     }
 
+    /* PC版でスロープタイトルを小さく */
     #slopeTitle h3 {
-      font-size: 2.5vw;
+      font-size: 2vw; /* 元の2.5vwより小さく */
     }
 
     #heightMenu {
@@ -76,7 +77,6 @@
       color: #1565c0;
     }
 
-    /* スロープリストをボタン風に */
     .slope-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -96,9 +96,17 @@
       cursor: pointer;
       border: 2px solid #1e88e5;
       border-radius: 0.8vw;
-      padding: 1vw;
-      transition: all 0.3s ease;
+      padding: 2vw;
+      transition: all 0.5s ease;
       background: none;
+      position: relative;
+      z-index: 0;
+    }
+
+    .slope-list div.expand {
+      transform: scale(1.3);
+      z-index: 10;
+      transition: transform 0.5s ease, z-index 0s ease 0s;
     }
 
     .slope-list div:hover {
@@ -168,14 +176,11 @@
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
       h2, h3 { font-size: 5vw; }
-      #slopeTitle h3 { font-size: 5vw; }
-      .slope-list {
-        grid-template-columns: 1fr;
-        gap: 4vw;
-      }
+      #slopeTitle h3 { font-size: 5vw; } /* スマホは大きめ表示 */
+      .slope-list { grid-template-columns: 1fr; gap: 4vw; }
+      .slope-list div { padding: 4vw; }
       .slope-list div img { height: 50vw; }
       .slope-list div h4 { font-size: 4vw; }
-      .slope-list div,
       .back-button,
       #heightMenu button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
       #currentHeight { font-size: 2.5vw; margin-top: 2vw; }
@@ -259,17 +264,22 @@
         slopeData[height].forEach(slope => {
           const div = document.createElement("div");
           div.onclick = () => {
-            document.querySelectorAll(".slope-list div").forEach(d => d.classList.remove("active"));
-            div.classList.add("active");
-            selectedSlopeName = slope.name;
+            div.classList.add("expand");
 
-            slopeImage.innerHTML = `
-              <h2>${slope.name}　の スロープ図</h2>
-              <img src="${slope.slope}" alt="${slope.name}スロープ">
-              <button class="back-button" onclick="backToList()">戻る</button>
-            `;
-            slopeList.style.display = "none";
-            slopeTitle.style.display = "none";
+            setTimeout(() => {
+              document.querySelectorAll(".slope-list div").forEach(d => d.classList.remove("active"));
+              div.classList.remove("expand");
+              div.classList.add("active");
+              selectedSlopeName = slope.name;
+
+              slopeImage.innerHTML = `
+                <h2>${slope.name}　の スロープ図</h2>
+                <img src="${slope.slope}" alt="${slope.name}スロープ">
+                <button class="back-button" onclick="backToList()">戻る</button>
+              `;
+              slopeList.style.display = "none";
+              slopeTitle.style.display = "none";
+            }, 500);
           };
 
           const img = document.createElement("img");
