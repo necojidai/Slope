@@ -32,23 +32,16 @@
       margin-top: 3vh; 
     }
 
-    /* カード風デザインを線画風に */
+    /* 画像と名前のブロック */
     .slope-list div {
       display: inline-block;
       margin: 2vw;
       text-align: center;
-      background: #fff;
-      border: 2px solid #444; /* シャドウを削除し線画に */
-      border-radius: 1vw;
-      padding: 1.5vw;
+      background: none; /* 背景削除 */
+      border: none; /* 枠線削除 */
+      padding: 0;
       width: 20vw;
-      max-width: 300px;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-
-    .slope-list div:hover {
-      transform: translateY(-0.3vw);
-      border-color: #1e88e5;
+      max-width: 280px;
     }
 
     .slope-list div img,
@@ -58,26 +51,27 @@
       border-radius: 0.8vw;
       display: block;
       margin: 0 auto 1vh;
-      /* 黒枠削除 */
       background: #fff;
     }
 
-    button { 
+    /* 高さ選択ボタン */
+    #heightMenu button { 
       margin: 1vw; 
-      padding: 1vw 2vw;
-      font-size: 1.2vw;
-      border-radius: 0.8vw;
+      padding: 2vw 4vw; /* ボタンを大きめに */
+      font-size: 2vw;
+      border-radius: 1vw;
       cursor: pointer;
       border: 2px solid #1e88e5;
-      background: none; /* 線画風は背景なし */
+      background: none; 
       color: #1e88e5;
       font-weight: 600;
       transition: all 0.3s ease;
+      min-width: 8vw;
     }
 
-    button:hover {
+    #heightMenu button:hover {
       background: #e3f2fd;
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
 
     /* 選択中の高さボタン */
@@ -85,6 +79,26 @@
       background: #bbdefb;
       border-color: #1565c0;
       color: #1565c0;
+    }
+
+    /* スロープ選択用ボタン */
+    .slope-list div button {
+      margin-top: 1vh;
+      padding: 1vw 2vw;
+      font-size: 1.3vw;
+      border-radius: 0.6vw;
+      cursor: pointer;
+      border: 2px solid #1e88e5;
+      background: none;
+      color: #1e88e5;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .slope-list div button:hover {
+      background: #e3f2fd;
+      transform: scale(1.05);
     }
 
     /* 現在の高さ表示 */ 
@@ -103,22 +117,25 @@
       .slope-list div {
         width: 85vw;
         margin: 4vw auto;
-        border-radius: 3vw;
-        padding: 4vw;
       }
       img {
         width: 100%;
         border-radius: 2vw;
       }
-      button {
+      #heightMenu button {
         width: 80vw;
         margin: 3vw auto;
-        padding: 4vw 0;
+        padding: 5vw 0;
+        font-size: 5vw;
+        border-radius: 2vw;
+      }
+      .slope-list div button {
         font-size: 4vw;
+        padding: 3vw 0;
         border-radius: 2vw;
       }
       #currentHeight {
-        margin-top: 1vw;
+        margin-top: 2vw;
         font-size: 5vw;
       }
     }
