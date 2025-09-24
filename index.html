@@ -32,8 +32,8 @@
       font-weight: 500;
     }
 
-    .slope-image h2 {
-      margin-bottom: 0.5vh;
+    h3 {
+      font-size: 2vw; /* PC用で一回り大きく */
     }
 
     .slope-list h3 {
@@ -41,7 +41,7 @@
     }
 
     #slopeTitle h3 {
-      font-size: 1.5vw;
+      font-size: 2vw; /* 元1.5vw → 2vwに変更 */
     }
 
     #heightMenu {
@@ -128,14 +128,14 @@
     /* 画像サイズを少し小さく修正（PC） */
     .slope-list div img {
       width: auto;
-      height: 12vw; /* ← 15vw → 12vw に変更 */
+      height: 12vw;
       object-fit: contain;
       border-radius: 0.8vw;
       margin-bottom: 1vh;
     }
 
     .slope-list div h4 {
-      font-size: 1.3vw;
+      font-size: 1.8vw; /* 元1.3vw → 1.8vwに変更 */
       font-weight: 600;
       color: #1e88e5;
       margin: 0;
@@ -182,8 +182,9 @@
     @media (max-width: 600px) {
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
-      h2, h3 { font-size: 5vw; }
-      #slopeTitle h3 { font-size: 6vw; }
+      h2 { font-size: 6vw; }
+      h3 { font-size: 7vw; } /* 元5vw → 7vwに変更 */
+      #slopeTitle h3 { font-size: 8vw; } /* 元6vw → 8vwに変更 */
 
       .slope-list {
         grid-template-columns: 1fr;
@@ -196,13 +197,12 @@
         padding: 4vw;
       }
 
-      /* 画像サイズを少し小さく修正（スマホ） */
       .slope-list div img {
-        height: 40vw; /* ← 50vw → 40vw に変更 */
+        height: 40vw; /* 元50vw → 40vwに変更 */
       }
 
       .slope-list div h4 {
-        font-size: 6vw;
+        font-size: 7vw; /* 元6vw → 7vwに変更 */
       }
 
       .slope-list div.expand {
