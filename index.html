@@ -1,258 +1,163 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>Slope - Line Art Style</title>
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-      text-align: center;
-      margin: 0;
-      background: #f5f5f5;
-      color: #222;
-    }
-
-    h1 {
-      font-size: 3vw;
-      margin: 2vh 0;
-      font-weight: 700;
-      color: #111;
-      border-bottom: 2px solid #222;
-      display: inline-block;
-      padding-bottom: 0.5vh;
-    }
-
-    h2, h3 { font-weight: 500; margin-bottom: 2vh; }
-
-    h2.slope-title {
-      background-color: #1565c0;
-      color: #ffffff;
-      padding: 1vh 2vw;
-      border-radius: 0.8vw;
-      font-weight: 700;
-      margin-bottom: 1vh; /* 画像との隙間を小さく */
-    }
-
-    h2 { font-size: 1.6vw; }
-    h3 { font-size: 2vw; }
-
-    .slope-list h3 { white-space: nowrap; }
-
-    #slopeTitle h3 { font-size: 2vw; display: none; } /* 初期状態は非表示 */
-
-    #heightMenu { margin-top: 3vh; }
-
-    #heightMenu button {
-      margin: 0.5vw;
-      padding: 1.2vw 3vw;
-      font-size: 2vw;
-      border-radius: 1vw;
-      cursor: pointer;
-      border: 2px solid #1e88e5;
-      background: none;
-      color: #1e88e5;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      min-width: 4vw;
-    }
-
-    #heightMenu button:hover { background: #e3f2fd; transform: scale(1.1); }
-    #heightMenu button.active { background: #bbdefb; border-color: #1565c0; color: #1565c0; }
-
-    #currentHeight {
-      margin-top: 0.5vh;
-      font-size: 1.2vw;
-      font-weight: bold;
-      color: #1565c0;
-    }
-
-    .slope-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1vw;
-      justify-items: center;
-      margin: 2vh;
-    }
-
-    .slope-list div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      max-width: 700px;
-      cursor: pointer;
-      border: 2px solid #1e88e5;
-      border-radius: 0.8vw;
-      padding: 2.5vw;
-      transition: all 0.5s ease;
-      background: #ffffff;
-      position: relative;
-      z-index: 0;
-      color: #1e88e5;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .slope-list div.expand { transform: scale(1.3); z-index: 10; transition: transform 0.5s ease, z-index 0s ease 0s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-    .slope-list div:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
-    .slope-list div.active { background: #ffffff; border-color: #1e88e5; color: #1e88e5; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .slope-list div img { width: auto; height: 12vw; object-fit: contain; border-radius: 0.8vw; margin-bottom: 1vh; }
-    .slope-list div h4 { font-size: 2.2vw; font-weight: 600; color: #1e88e5; margin: 0; }
-
-    .slope-image { display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 90%; margin: 2vh auto; }
-    .slope-image img { display: block; max-width: 90%; height: auto; margin: 0.5vh auto 2vh auto; }
-
-    .back-button {
-      display: inline-block;
-      margin: 2vh auto;
-      width: auto;
-      min-width: 150px;
-      font-size: 1.5vw;
-      padding: 1vh 2vw;
-      border-radius: 0.6vw;
-      cursor: pointer;
-      border: 2px solid #1e88e5;
-      background: none;
-      color: #1e88e5;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .back-button:hover { background: #e3f2fd; transform: scale(1.05); }
-
-    @media (max-width: 600px) {
-      body { font-size: 8vw; }
-      h1 { font-size: 8vw; }
-      h2 { font-size: 9vw; }
-      h3 { font-size: 9vw; }
-      #slopeTitle h3 { font-size: 8vw; }
-
-      .slope-list { grid-template-columns: 1fr; gap: 3vw; padding: 0 2vw; }
-      .slope-list div { width: 100%; max-width: 90%; padding: 4vw; }
-      .slope-list div img { height: 40vw; }
-      .slope-list div h4 { font-size: 9vw; }
-      .slope-list div.expand { transform: scale(1.5) rotate(-2deg); z-index: 10; }
-      #heightMenu button { margin: 2vw; font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
-      .back-button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
-      #currentHeight { font-size: 3vw; margin-top: 2vw; }
-      .slope-image img { max-width: 95%; }
-      .slope-list div.active { border-width: 2px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Slope - Line Art Style</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    text-align: center;
+    margin: 0;
+    background: #f5f5f5;
+    color: #222;
+  }
+  h1 { font-size: 3vw; margin: 2vh 0; font-weight: 700; color: #111; border-bottom: 2px solid #222; display: inline-block; padding-bottom: 0.5vh; }
+  h2.slope-title { background-color: #1565c0; color: #fff; padding: 1vh 2vw; border-radius: 0.8vw; font-weight: 700; margin-bottom: 1vh; }
+  h2 { font-size: 1.6vw; }
+  h3 { font-size: 2vw; display: none; margin-bottom: 2vh; font-weight: 500; }
+  #heightMenu { margin-top: 3vh; }
+  #heightMenu button {
+    margin: 0.5vw; padding: 1.2vw 3vw; font-size: 2vw; border-radius: 1vw;
+    cursor: pointer; border: 2px solid #1e88e5; background: none; color: #1e88e5;
+    font-weight: 600; transition: all 0.3s ease; min-width: 4vw;
+  }
+  #heightMenu button:hover { background: #e3f2fd; transform: scale(1.1); }
+  #heightMenu button.active { background: #bbdefb; border-color: #1565c0; color: #1565c0; }
+  #currentHeight { margin-top: 0.5vh; font-size: 1.2vw; font-weight: bold; color: #1565c0; }
+  .slope-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1vw; justify-items: center; margin: 2vh; }
+  .slope-list div {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    width: 100%; max-width: 700px; cursor: pointer; border: 2px solid #1e88e5;
+    border-radius: 0.8vw; padding: 2.5vw; transition: all 0.5s ease; background: #fff;
+    position: relative; z-index: 0; color: #1e88e5; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .slope-list div.expand { transform: scale(1.3); z-index: 10; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+  .slope-list div:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+  .slope-list div img { width: auto; height: 12vw; object-fit: contain; border-radius: 0.8vw; margin-bottom: 1vh; }
+  .slope-list div h4 { font-size: 2.2vw; font-weight: 600; color: #1e88e5; margin: 0; }
+  .slope-image { display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 90%; margin: 2vh auto; }
+  .slope-image img { display: block; max-width: 90%; height: auto; margin: 0.5vh auto 2vh auto; }
+  .back-button {
+    display: inline-block; margin: 2vh auto; width: auto; min-width: 150px;
+    font-size: 1.5vw; padding: 1vh 2vw; border-radius: 0.6vw; cursor: pointer;
+    border: 2px solid #1e88e5; background: none; color: #1e88e5; font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .back-button:hover { background: #e3f2fd; transform: scale(1.05); }
+  @media (max-width: 600px) {
+    body, h1, h2, h3 { font-size: 8vw; }
+    .slope-list { grid-template-columns: 1fr; gap: 3vw; padding: 0 2vw; }
+    .slope-list div { padding: 4vw; max-width: 90%; }
+    .slope-list div img { height: 40vw; }
+    .slope-list div h4 { font-size: 9vw; }
+    #heightMenu button, .back-button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
+    #currentHeight { font-size: 3vw; margin-top: 2vw; }
+    .slope-image img { max-width: 95%; }
+  }
+</style>
 </head>
 <body>
-  <h1>Slope</h1>
 
-  <div id="heightMenu">
-    <h2>段差の高さ（mm）を選んでください</h2>
-    <button onclick="showslope(100)">100</button>
-    <button onclick="showslope(200)">200</button>
-    <button onclick="showslope(300)">300</button>
-    <button onclick="showslope(450)">450</button>
-    <button onclick="showslope(650)">650</button>
-  </div>
+<h1>Slope</h1>
 
-  <div id="currentHeight"></div>
+<div id="heightMenu">
+  <h2>段差の高さ（mm）を選んでください</h2>
+  <button data-height="100">100</button>
+  <button data-height="200">200</button>
+  <button data-height="300">300</button>
+  <button data-height="450">450</button>
+  <button data-height="650">650</button>
+</div>
 
-  <div id="slopeTitle">
-    <h3>スロープの種類を選んでください</h3>
-  </div>
+<div id="currentHeight"></div>
 
-  <div class="slope-list" id="slopeList"></div>
+<div id="slopeTitle"><h3>スロープの種類を選んでください</h3></div>
 
-  <div class="slope-image" id="slopeImage"></div>
+<div class="slope-list" id="slopeList"></div>
+<div class="slope-image" id="slopeImage"></div>
 
-  <script>
-    const slopeData = {
-      100: [
-        { name: "段差くん", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },
-        { name: "アルミスロープDUO", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope.jpg" },
-        { name: "かるスロ", img: "images/kalusulo.jpg", slope: "images/kalusulo_slope.jpg" },
-        { name: "SGドラゴン L1.5", img: "images/sgdragon.jpg", slope: "images/sgdragon_slope.jpg" },
-        { name: "アクトスロープ", img: "images/actslope.jpg", slope: "images/actslope_slope.jpg" }
-      ],
-      200: [
-        { name: "段差くん", img: "images/dansakun.jpg", slope: "images/dansakun_slope2.jpg" },
-        { name: "アルミスロープDUO", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope2.jpg" },    
-        { name: "かるスロ", img: "images/kalusulo.jpg", slope: "images/kalusulo_slope2.jpg" },
-        { name: "SGドラゴン L1.5 ＋L1.5プラス", img: "images/sgdragon2.jpg", slope: "images/sgdragon_slope2.jpg" },
-        { name: "アクトスロープ", img: "images/actslope.jpg", slope: "images/actslope_slope2.jpg" }
-      ],
-      300: [
-        { name: "段差くん + 段差通路架台", img: "images/dansakun2.jpg", slope: "images/dansakun_slope3.jpg" },
-        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO2.jpg", slope: "images/alslopeDUO_slope3.jpg" },
-        { name: "アクトスロープ + スロープステップ", img: "images/actslope2.jpg", slope: "images/actslope_slope3.jpg" }
-      ],
-      450: [
-        { name: "段差くん + 段差通路架台", img: "images/dansakun2.jpg", slope: "images/dansakun_slope4.jpg" },
-        { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO2.jpg", slope: "images/alslopeDUO_slope4.jpg" },
-        { name: "アクトスロープ + スロープステップ", img: "images/actslope2.jpg", slope: "images/actslope_slope4.jpg" }
-      ],
-      650: [
-        { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon3.jpg", slope: "images/sgdragon_slope5.jpg" }
-      ]
-    };
+<script>
+const slopeData = {
+  100: [
+    { name: "段差くん", img: "images/dansakun.jpg", slope: "images/dansakun_slope.jpg" },
+    { name: "アルミスロープDUO", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope.jpg" },
+    { name: "かるスロ", img: "images/kalusulo.jpg", slope: "images/kalusulo_slope.jpg" },
+    { name: "SGドラゴン L1.5", img: "images/sgdragon.jpg", slope: "images/sgdragon_slope.jpg" },
+    { name: "アクトスロープ", img: "images/actslope.jpg", slope: "images/actslope_slope.jpg" }
+  ],
+  200: [
+    { name: "段差くん", img: "images/dansakun.jpg", slope: "images/dansakun_slope2.jpg" },
+    { name: "アルミスロープDUO", img: "images/alslopeDUO.jpg", slope: "images/alslopeDUO_slope2.jpg" },
+    { name: "かるスロ", img: "images/kalusulo.jpg", slope: "images/kalusulo_slope2.jpg" },
+    { name: "SGドラゴン L1.5 ＋L1.5プラス", img: "images/sgdragon2.jpg", slope: "images/sgdragon_slope2.jpg" },
+    { name: "アクトスロープ", img: "images/actslope.jpg", slope: "images/actslope_slope2.jpg" }
+  ],
+  300: [
+    { name: "段差くん + 段差通路架台", img: "images/dansakun2.jpg", slope: "images/dansakun_slope3.jpg" },
+    { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO2.jpg", slope: "images/alslopeDUO_slope3.jpg" },
+    { name: "アクトスロープ + スロープステップ", img: "images/actslope2.jpg", slope: "images/actslope_slope3.jpg" }
+  ],
+  450: [
+    { name: "段差くん + 段差通路架台", img: "images/dansakun2.jpg", slope: "images/dansakun_slope4.jpg" },
+    { name: "アルミスロープDUO + スロープステップ", img: "images/alslopeDUO2.jpg", slope: "images/alslopeDUO_slope4.jpg" },
+    { name: "アクトスロープ + スロープステップ", img: "images/actslope2.jpg", slope: "images/actslope_slope4.jpg" }
+  ],
+  650: [
+    { name: "SGドラゴン L1.5 ＋L1.5プラス +ベースHi66", img: "images/sgdragon3.jpg", slope: "images/sgdragon_slope5.jpg" }
+  ]
+};
 
-    let currentHeight = null;
+let currentHeight = null;
+const slopeListEl = document.getElementById("slopeList");
+const slopeImageEl = document.getElementById("slopeImage");
+const currentHeightEl = document.getElementById("currentHeight");
+const slopeTitleH3 = document.querySelector("#slopeTitle h3");
+const buttons = document.querySelectorAll("#heightMenu button");
 
-    function showslope(height) {
-      currentHeight = height;
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => showslope(btn.dataset.height));
+});
 
-      const slopeList = document.getElementById("slopeList");
-      const slopeImage = document.getElementById("slopeImage");
-      const heightLabel = document.getElementById("currentHeight");
-      const buttons = document.querySelectorAll("#heightMenu button");
-      const slopeTitleH3 = document.querySelector("#slopeTitle h3");
+function showslope(height) {
+  currentHeight = height;
+  currentHeightEl.textContent = `現在の高さ: ${height} mm`;
 
-      buttons.forEach(btn => {
-        btn.classList.remove("active");
-        if (btn.textContent == height) btn.classList.add("active");
-      });
+  buttons.forEach(btn => btn.classList.toggle("active", btn.dataset.height == height));
 
-      heightLabel.textContent = `現在の高さ: ${height} mm`;
+  slopeTitleH3.style.display = "block";
+  slopeListEl.style.display = "grid";
+  slopeListEl.innerHTML = "";
+  slopeImageEl.innerHTML = "";
 
-      slopeList.innerHTML = "";
-      slopeImage.innerHTML = "";
+  const data = slopeData[height];
+  if (!data) { slopeListEl.innerHTML = "<p>該当する高さのスロープデータがありません。</p>"; return; }
 
-      // 段差の高さ選択後に h3 を表示
-      slopeTitleH3.style.display = "block";
+  data.forEach(slope => {
+    const div = document.createElement("div");
+    div.innerHTML = `<img src="${slope.img}" alt="${slope.name}"><h4>${slope.name}</h4>`;
+    div.addEventListener("click", () => showSlopeDetail(div, slope));
+    slopeListEl.appendChild(div);
+  });
+}
 
-      if (slopeData[height]) {
-        slopeData[height].forEach(slope => {
-          const div = document.createElement("div");
-          div.onclick = () => {
-            div.classList.add("expand");
-            setTimeout(() => {
-              div.classList.remove("expand");
-              slopeImage.innerHTML = `
-                <h2 class="slope-title">${slope.name} の スロープ図</h2>
-                <img src="${slope.slope}" alt="${slope.name}スロープ">
-                <button class="back-button" onclick="backToList()">戻る</button>
-              `;
-              slopeList.style.display = "none";
-              slopeTitleH3.style.display = "none";
-            }, 500);
-          };
-          const img = document.createElement("img");
-          img.src = slope.img;
-          img.alt = slope.name;
-          const nameLabel = document.createElement("h4");
-          nameLabel.textContent = slope.name;
-          div.appendChild(img);
-          div.appendChild(nameLabel);
-          slopeList.appendChild(div);
-        });
-        slopeList.style.display = "grid";
-      } else {
-        slopeList.innerHTML = "<p>該当する高さのスロープデータがありません。</p>";
-      }
-    }
+function showSlopeDetail(div, slope) {
+  div.classList.add("expand");
+  setTimeout(() => {
+    div.classList.remove("expand");
+    slopeImageEl.innerHTML = `
+      <h2 class="slope-title">${slope.name} の スロープ図</h2>
+      <img src="${slope.slope}" alt="${slope.name}スロープ">
+      <button class="back-button" onclick="backToList()">戻る</button>
+    `;
+    slopeListEl.style.display = "none";
+    slopeTitleH3.style.display = "none";
+  }, 500);
+}
 
-    function backToList() {
-      if (currentHeight) showslope(currentHeight);
-    }
-  </script>
+function backToList() {
+  if (currentHeight) showslope(currentHeight);
+}
+</script>
 </body>
 </html>
