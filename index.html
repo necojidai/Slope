@@ -12,9 +12,29 @@
     background: #f5f5f5;
     color: #222;
   }
-  h1 { font-size: 3vw; margin: 2vh 0; font-weight: 700; color: #111; border-bottom: 2px solid #222; display: inline-block; padding-bottom: 0.5vh; }
-  h2.slope-title { background-color: #1565c0; color: #fff; padding: 1vh 2vw; border-radius: 0.8vw; font-weight: 700; margin-bottom: 1vh; }
+  h1 { 
+    font-size: 3vw; 
+    margin: 2vh 0; 
+    font-weight: 700; 
+    color: #111; 
+    border-bottom: 2px solid #222; 
+    display: inline-block; 
+    padding-bottom: 0.5vh; 
+  }
+  h2.slope-title { 
+    background-color: #1565c0; 
+    color: #fff; 
+    padding: 1vh 2vw; 
+    border-radius: 0.8vw; 
+    font-weight: 700; 
+    margin-bottom: 1vh; 
+  }
   h2 { font-size: 1.6vw; }
+  #heightMenu h2 { 
+    font-weight: 400;   /* bold解除 */
+    font-size: 2vw;     /* 文字サイズを大きく */
+    margin-bottom: 1vh;
+  }
   h3 { font-size: 2vw; display: none; margin-bottom: 2vh; font-weight: 500; }
   #heightMenu { margin-top: 3vh; }
   #heightMenu button {
@@ -122,16 +142,17 @@ buttons.forEach(btn => {
 function showslope(height) {
   currentHeight = height;
   currentHeightEl.textContent = `現在の高さ: ${height} mm`;
-
   buttons.forEach(btn => btn.classList.toggle("active", btn.dataset.height == height));
-
   slopeTitleH3.style.display = "block";
   slopeListEl.style.display = "grid";
   slopeListEl.innerHTML = "";
   slopeImageEl.innerHTML = "";
 
   const data = slopeData[height];
-  if (!data) { slopeListEl.innerHTML = "<p>該当する高さのスロープデータがありません。</p>"; return; }
+  if (!data) { 
+    slopeListEl.innerHTML = "<p>該当する高さのスロープデータがありません。</p>"; 
+    return; 
+  }
 
   data.forEach(slope => {
     const div = document.createElement("div");
