@@ -48,7 +48,7 @@
       margin-top: 3vh;
     }
 
-    /* PC用のボタン間隔（狭める） */
+    /* PC用のボタン間隔 */
     #heightMenu button {
       margin: 0.5vw;
       padding: 1.2vw 3vw;
@@ -125,9 +125,10 @@
       color: #1e88e5;
     }
 
+    /* 画像サイズを少し小さく修正（PC） */
     .slope-list div img {
       width: auto;
-      height: 15vw;
+      height: 12vw; /* ← 15vw → 12vw に変更 */
       object-fit: contain;
       border-radius: 0.8vw;
       margin-bottom: 1vh;
@@ -182,8 +183,6 @@
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
       h2, h3 { font-size: 5vw; }
-
-      /* ← スマホ版だけ一回り大きく修正 */
       #slopeTitle h3 { font-size: 6vw; }
 
       .slope-list {
@@ -197,9 +196,11 @@
         padding: 4vw;
       }
 
-      .slope-list div img { height: 50vw; }
+      /* 画像サイズを少し小さく修正（スマホ） */
+      .slope-list div img {
+        height: 40vw; /* ← 50vw → 40vw に変更 */
+      }
 
-      /* スマホ版：種類名を大きくする */
       .slope-list div h4 {
         font-size: 6vw;
       }
