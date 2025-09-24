@@ -2,38 +2,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Slope - Premium Animated Design</title>
+<title>Slope - Stylish Design</title>
 <style>
   * { box-sizing: border-box; }
   body {
     font-family: "Segoe UI", "Helvetica Neue", sans-serif;
     text-align: center;
     margin: 0;
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
     color: #222;
-    background: linear-gradient(145deg, #f0f4f8, #d9e2ec);
-    overflow-x: hidden;
-    position: relative;
   }
-
-  /* 光のアニメーション */
-  body::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: floatLight 15s linear infinite;
-    z-index: 0;
-  }
-
-  @keyframes floatLight {
-    0% { transform: translate(0,0) rotate(0deg); }
-    50% { transform: translate(30%, 20%) rotate(180deg); }
-    100% { transform: translate(0,0) rotate(360deg); }
-  }
-
   h1 { 
     font-size: 3vw; 
     margin: 2vh 0; 
@@ -42,68 +20,57 @@
     border-bottom: 3px solid #1565c0; 
     display: inline-block; 
     padding-bottom: 0.5vh; 
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    position: relative; z-index: 1;
   }
-
   h2.slope-title { 
-    background: linear-gradient(135deg, #1565c0, #1e88e5); 
+    background-color: #1565c0; 
     color: #fff; 
     padding: 1vh 2vw; 
-    border-radius: 1vw; 
+    border-radius: 0.8vw; 
     font-weight: 700; 
     margin-bottom: 1vh; 
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    position: relative; z-index: 1;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
   }
-
-  h2, #heightMenu h2 { font-weight: 400; color: #0d47a1; }
-  #heightMenu h2 { font-size: 2vw; margin-bottom: 2vh; }
+  h2 { font-size: 1.6vw; }
+  #heightMenu h2 { 
+    font-weight: 400;
+    font-size: 2vw;
+    margin-bottom: 2vh;
+    color: #0d47a1;
+  }
   h3 { font-size: 2vw; display: none; margin-bottom: 2vh; font-weight: 500; color: #1565c0; }
-  #heightMenu { margin-top: 3vh; position: relative; z-index: 1; }
-
+  #heightMenu { margin-top: 3vh; }
   #heightMenu button {
     margin: 0.5vw; padding: 1.2vw 3vw; font-size: 2vw; border-radius: 1vw;
-    cursor: pointer; border: none; background: #ffffff; color: #fff;
+    cursor: pointer; border: none; background: #64b5f6; color: #fff;
     font-weight: 600; transition: all 0.3s ease; min-width: 4vw;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: relative; z-index: 1;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
   }
-
   #heightMenu button:hover { background: #42a5f5; transform: translateY(-2px); }
   #heightMenu button.active { background: #1565c0; color: #fff; }
-  #currentHeight { margin-top: 0.5vh; font-size: 1.4vw; font-weight: bold; color: #0d47a1; text-shadow: 0 1px 2px rgba(0,0,0,0.2); position: relative; z-index: 1; }
-
-  .slope-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2vw; justify-items: center; margin: 2vh; position: relative; z-index: 1; }
+  #currentHeight { margin-top: 0.5vh; font-size: 1.4vw; font-weight: bold; color: #0d47a1; }
+  .slope-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2vw; justify-items: center; margin: 2vh; }
   .slope-list div {
     display: flex; flex-direction: column; align-items: center; text-align: center;
     width: 100%; max-width: 700px; cursor: pointer; border-radius: 1vw; padding: 2.5vw;
-    transition: all 0.5s ease; background: linear-gradient(145deg, #ffffff, #e0e6ed);
-    position: relative; z-index: 1; color: #1565c0;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: all 0.5s ease; background: #fff;
+    position: relative; z-index: 0; color: #1565c0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-
-  .slope-list div.expand { transform: scale(1.1); z-index: 10; box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
-  .slope-list div:hover { transform: scale(1.05); box-shadow: 0 10px 22px rgba(0,0,0,0.2); }
-
-  .slope-list div img { width: auto; height: 12vw; object-fit: contain; border-radius: 0.8vw; margin-bottom: 1vh; }
-  .slope-list div h4 { font-size: 2.2vw; font-weight: 600; color: #1565c0; margin: 0; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
-
-  .slope-image { display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 90%; margin: 2vh auto; position: relative; z-index: 1; }
-  .slope-image img { display: block; max-width: 90%; height: auto; margin: 1vh auto 2vh auto; border-radius: 0.8vw; box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
-
+  .slope-list div.expand { transform: scale(1.1); z-index: 10; box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
+  .slope-list div:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+  .slope-list div img { width: auto; height: 12vw; object-fit: contain; border-radius: 0.6vw; margin-bottom: 1vh; }
+  .slope-list div h4 { font-size: 2.2vw; font-weight: 600; color: #1565c0; margin: 0; }
+  .slope-image { display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 90%; margin: 2vh auto; }
+  .slope-image img { display: block; max-width: 90%; height: auto; margin: 1vh auto 2vh auto; border-radius: 0.6vw; }
   .back-button {
     display: inline-block; margin: 2vh auto; width: auto; min-width: 150px;
     font-size: 1.5vw; padding: 1vh 2vw; border-radius: 0.8vw; cursor: pointer;
     border: none; background: #64b5f6; color: #fff; font-weight: 600;
-    transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease; box-shadow: 0 3px 8px rgba(0,0,0,0.15);
   }
   .back-button:hover { background: #42a5f5; transform: translateY(-2px); }
-
   @media (max-width: 600px) {
-    body { font-size: 4vw; }
-    h1 { font-size: 6vw; }
-    #heightMenu h2, h2.slope-title { font-size: 6vw; }
-    h3 { font-size: 5vw; }
+    body, h1, h2, h3 { font-size: 6vw; }
     .slope-list { grid-template-columns: 1fr; gap: 3vw; padding: 0 2vw; }
     .slope-list div { padding: 4vw; max-width: 90%; }
     .slope-list div img { height: 40vw; }
