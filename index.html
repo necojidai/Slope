@@ -40,9 +40,8 @@
       white-space: nowrap;
     }
 
-    /* ★PC版の「スロープの種類を選んでください」を小さく */
     #slopeTitle h3 {
-      font-size: 1.5vw; /* 3vwから小さく調整 */
+      font-size: 1.5vw;
     }
 
     #heightMenu {
@@ -81,13 +80,14 @@
       color: #1565c0;
     }
 
+    /* スロープリスト */
     .slope-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 4vw;
+      gap: 1vw; /* 隙間を狭く調整 */
       justify-items: center;
       margin: 3vh auto;
-      max-width: 95%;
+      max-width: 95%; /* 幅を広げて隙間を補正 */
     }
 
     .slope-list div {
@@ -180,13 +180,11 @@
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
       h2, h3 { font-size: 5vw; }
-
-      /* ★スマホ版の「スロープの種類を選んでください」を大きく */
-      #slopeTitle h3 { font-size: 6vw; }
+      #slopeTitle h3 { font-size: 5vw; }
 
       .slope-list {
         grid-template-columns: 1fr;
-        gap: 4vw;
+        gap: 3vw;
         padding: 0 2vw;
       }
       .slope-list div {
