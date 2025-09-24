@@ -85,10 +85,10 @@
     .slope-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1vw; /* 隙間を狭く調整 */
+      gap: 1vw;
       justify-items: center;
       margin: 3vh auto;
-      max-width: 95%; /* 幅を広げて隙間を補正 */
+      max-width: 95%;
     }
 
     .slope-list div {
@@ -182,7 +182,7 @@
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
       h2, h3 { font-size: 5vw; }
-      #slopeTitle h3 { font-size: 5vw; }
+      #slopeTitle h3 { font-size: 5vw; } /* ← 現状維持 */
 
       .slope-list {
         grid-template-columns: 1fr;
@@ -196,14 +196,17 @@
       }
 
       .slope-list div img { height: 50vw; }
-      .slope-list div h4 { font-size: 4.5vw; }
+
+      /* スマホ版：種類名を大きくする */
+      .slope-list div h4 {
+        font-size: 6vw; /* ← 以前の4.5vwから拡大 */
+      }
 
       .slope-list div.expand {
         transform: scale(1.5) rotate(-2deg);
         z-index: 10;
       }
 
-      /* スマホは現状の余白を維持 */
       #heightMenu button {
         margin: 2vw;
         font-size: 4vw;
