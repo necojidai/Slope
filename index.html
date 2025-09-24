@@ -48,8 +48,9 @@
       margin-top: 3vh;
     }
 
+    /* PC用のボタン間隔（狭める） */
     #heightMenu button {
-      margin: 1vw;
+      margin: 0.5vw;
       padding: 1.2vw 3vw;
       font-size: 2vw;
       border-radius: 1vw;
@@ -176,6 +177,7 @@
       transform: scale(1.05);
     }
 
+    /* スマホ用スタイル */
     @media (max-width: 600px) {
       body { font-size: 4vw; }
       h1 { font-size: 7vw; }
@@ -201,8 +203,16 @@
         z-index: 10;
       }
 
-      .back-button,
-      #heightMenu button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
+      /* スマホは現状の余白を維持 */
+      #heightMenu button {
+        margin: 2vw;
+        font-size: 4vw;
+        padding: 3vw;
+        border-radius: 2vw;
+        min-width: 60vw;
+      }
+
+      .back-button { font-size: 4vw; padding: 3vw; border-radius: 2vw; min-width: 60vw; }
       #currentHeight { font-size: 3vw; margin-top: 2vw; }
       .slope-image img { max-width: 95%; }
       .slope-list div.active { border-width: 2px; }
